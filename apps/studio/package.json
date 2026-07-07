@@ -1,0 +1,31 @@
+{
+  "name": "@archron/studio",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "next": "^16",
+    "react": "^19",
+    "react-dom": "^19",
+    "@archron/shared": "workspace:*",
+    "@archron/database": "workspace:*",
+    "@archron/auth": "workspace:*",
+    "@archron/search": "workspace:*",
+    "@archron/renderer": "workspace:*",
+    "@archron/ui": "workspace:*",
+    "@archron/editor": "workspace:*",
+    "@archron/knowledge-engine": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^6.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "eslint": "^10"
+  }
+}
