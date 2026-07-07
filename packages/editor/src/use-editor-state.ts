@@ -6,7 +6,7 @@ import type { EditorState } from "./index"
 
 export function useEditorState(initial?: Partial<EditorState>) {
   const [state, setState] = useState<EditorState>(createInitialState(initial))
-  const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined)
+  const intervalRef = useRef(0)
 
   const setContent = useCallback((markdown: string) => {
     setState((s) => ({
