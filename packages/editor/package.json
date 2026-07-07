@@ -9,7 +9,13 @@
   },
   "dependencies": {
     "@archron/shared": "workspace:*",
-    "@archron/ui": "workspace:*"
+    "@archron/ui": "workspace:*",
+    "@tiptap/extension-code-block-lowlight": "^2",
+    "@tiptap/extension-highlight": "^2",
+    "@tiptap/extension-placeholder": "^2",
+    "@tiptap/pm": "^2",
+    "@tiptap/react": "^2",
+    "@tiptap/starter-kit": "^2"
   },
   "devDependencies": {
     "typescript": "^6.0",
