@@ -286,7 +286,13 @@ importers:
       '@tiptap/starter-kit':
         specifier: ^2
         version: 2.27.2
+      react:
+        specifier: ^19.2.7
+        version: 19.2.7
     devDependencies:
+      '@types/react':
+        specifier: ^19.2.17
+        version: 19.2.17
       eslint:
         specifier: ^10
         version: 10.6.0
