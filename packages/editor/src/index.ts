@@ -222,3 +222,19 @@ export function countWords(markdown: string): number {
 export function estimateReadingTime(wordCount: number): number {
   return Math.max(1, Math.ceil(wordCount / 200))
 }
+
+export { EditorCore } from "./editor-core"
+export type { EditorCoreProps } from "./editor-core"
+export { SlashCommandMenu } from "./slash-command-menu"
+export type { SlashCommandMenuProps } from "./slash-command-menu"
+export { WikiLinkAutocomplete } from "./wikilink-autocomplete"
+export type { WikiLinkAutocompleteProps, WikiLinkResult } from "./wikilink-autocomplete"
+export { EditorToolbar } from "./editor-toolbar"
+export type { EditorToolbarProps } from "./editor-toolbar"
+export { StatusBar } from "./status-bar"
+export type { StatusBarProps } from "./status-bar"
+export { LivePreview } from "./live-preview"
+export type { LivePreviewProps } from "./live-preview"
+export { EditorLayout } from "./editor-layout"
+export type { EditorLayoutProps } from "./editor-layout"
+export { useEditorState } from "./use-editor-state"
