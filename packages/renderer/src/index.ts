@@ -35,3 +35,5 @@ export type { PluginRegistry } from "./plugins"
 
 export { createKnowledgeResolver } from "./resolver"
 export type { KnowledgeResolver } from "./resolver"
+
+export { DEFAULT_COMPONENTS } from "./components"
