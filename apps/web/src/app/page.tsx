@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { SearchBar } from "@/components/search/search-bar"
 
 export default function HomePage() {
   return (
@@ -36,13 +37,7 @@ export default function HomePage() {
 
       {/* Search */}
       <div className="mx-auto -mt-8 w-full max-w-reading px-6">
-        <div className="relative">
-          <input
-            type="search"
-            placeholder="Search Everything..."
-            className="w-full rounded-xl border border-border bg-card px-5 py-4 text-center font-serif text-body text-text placeholder:text-text-disabled focus:border-primary/40 focus:outline-none focus:ring-1 focus:ring-primary/20 transition-colors duration-[var(--motion-normal)]"
-          />
-        </div>
+        <SearchBar />
       </div>
 
       {/* ============================================
@@ -56,7 +51,7 @@ export default function HomePage() {
           {[1, 2, 3].map((i) => (
             <Link
               key={i}
-              href="#"
+              href={i === 1 ? "/concepts/structure-of-the-unconscious" : i === 2 ? "/concepts/archetypes" : "/concepts/the-shadow"}
               className="group rounded-xl border border-border bg-card p-5 transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated"
             >
               <div className="mb-2 flex items-center gap-2">
@@ -91,7 +86,7 @@ export default function HomePage() {
           {[1, 2].map((i) => (
             <Link
               key={i}
-              href="#"
+              href={i === 1 ? "/guides" : "/guides"}
               className="group rounded-xl border border-border bg-card p-6 transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated"
             >
               <div className="mb-3 flex items-center gap-2">
@@ -129,7 +124,7 @@ export default function HomePage() {
           ].map((item) => (
             <Link
               key={item.title}
-              href="#"
+              href={`/concepts/${item.title.toLowerCase().replace(/\s+/g, "-")}`}
               className="group rounded-xl border border-border bg-card p-4 transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated"
             >
               <div className="mb-2 flex items-center gap-2">
@@ -149,6 +144,53 @@ export default function HomePage() {
               <p className="mt-1 font-sans text-caption text-text-muted">{item.domain}</p>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* ============================================
+          BROWSE
+          ============================================ */}
+      <section className="mx-auto mt-20 w-full max-w-container-page px-6">
+        <h2 className="mb-6 font-serif text-section font-semibold text-text">
+          Browse
+        </h2>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <Link
+            href="/explore"
+            className="group rounded-xl border border-border bg-card p-6 transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated"
+          >
+            <span className="text-2xl">🗺</span>
+            <h3 className="mt-3 font-serif text-card-title font-semibold text-text group-hover:text-primary transition-colors">
+              Explore
+            </h3>
+            <p className="mt-1 font-sans text-caption text-text-muted">
+              Discover knowledge through disciplines and domains
+            </p>
+          </Link>
+          <Link
+            href="/timeline"
+            className="group rounded-xl border border-border bg-card p-6 transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated"
+          >
+            <span className="text-2xl">⏳</span>
+            <h3 className="mt-3 font-serif text-card-title font-semibold text-text group-hover:text-primary transition-colors">
+              Timeline
+            </h3>
+            <p className="mt-1 font-sans text-caption text-text-muted">
+              Walk through the history of human thought
+            </p>
+          </Link>
+          <Link
+            href="/constellation"
+            className="group rounded-xl border border-border bg-card p-6 transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated"
+          >
+            <span className="text-2xl">✦</span>
+            <h3 className="mt-3 font-serif text-card-title font-semibold text-text group-hover:text-primary transition-colors">
+              Constellation
+            </h3>
+            <p className="mt-1 font-sans text-caption text-text-muted">
+              Visualize the connections between ideas
+            </p>
+          </Link>
         </div>
       </section>
 
