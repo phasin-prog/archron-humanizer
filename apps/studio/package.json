@@ -9,23 +9,25 @@
     "lint": "eslint src/"
   },
   "dependencies": {
+    "@archron/auth": "workspace:*",
+    "@archron/database": "workspace:*",
+    "@archron/editor": "workspace:*",
+    "@archron/knowledge-engine": "workspace:*",
+    "@archron/renderer": "workspace:*",
+    "@archron/search": "workspace:*",
+    "@archron/shared": "workspace:*",
+    "@archron/ui": "workspace:*",
+    "@clerk/nextjs": "^7.5.12",
+    "@tiptap/react": "^2.27.2",
     "next": "^16",
     "react": "^19",
-    "react-dom": "^19",
-    "@archron/shared": "workspace:*",
-    "@archron/database": "workspace:*",
-    "@archron/auth": "workspace:*",
-    "@archron/search": "workspace:*",
-    "@archron/renderer": "workspace:*",
-    "@archron/ui": "workspace:*",
-    "@archron/editor": "workspace:*",
-    "@archron/knowledge-engine": "workspace:*"
+    "react-dom": "^19"
   },
   "devDependencies": {
-    "typescript": "^6.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "eslint": "^10",
     "tailwindcss": "^4",
-    "eslint": "^10"
+    "typescript": "^6.0"
   }
 }
