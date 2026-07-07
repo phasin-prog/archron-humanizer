@@ -375,4 +375,166 @@ Long-term Maintainability
 
 ---
 
+# Toolchain Governance
+
+## Enforcement Level: ABSOLUTE
+
+Every AI agent operating on this repository **MUST** use both tools below.
+
+No exception. No workaround.
+
+---
+
+# A. Caveman — Workflow Hooks
+
+## What
+
+Caveman injects hooks into AI coding agents (Claude Code, OpenCode, Gemini CLI,
+Codex) that enforce structured, reviewable, traceable agent behavior.
+
+It is NOT a CLI binary. It is a plugin that lives inside each agent.
+
+**Repository**: `JuliusBrussee/caveman`
+
+## Installation (One-Time)
+
+```powershell
+# Windows PowerShell 5.1+
+irm https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.ps1 | iex
+```
+
+## Plugins Per Platform
+
+| Platform   | Command |
+|------------|---------|
+| Claude Code | `claude plugin install caveman@caveman` |
+| OpenCode   | Auto-installed via install.ps1 or `rtk init -g --opencode` |
+| Gemini CLI | `gemini extensions install https://github.com/JuliusBrussee/caveman` |
+| Codex/Cursor | Auto-installed via install.ps1 |
+
+## Hook Behavior
+
+Caveman hooks fire at:
+
+| Trigger | Action |
+|---------|--------|
+| **SessionStart** | Verify environment, check context, enforce architecture rules |
+| **UserPromptSubmit** | Validate prompt against agent scope before execution |
+
+## Compliance
+
+An agent or developer operating **without caveman hooks active** is operating
+**outside the governed workflow**. Outputs are NOT valid ARCHRON contributions.
+
+---
+
+# B. RTK — Token Optimizer
+
+## What
+
+RTK (Rust Token Killer) is a CLI binary that wraps shell commands and filters
+output to reduce LLM token consumption by 60–99%.
+
+Every shell command an agent issues **MUST** pass through `rtk`.
+
+**Repository**: `rtk-ai/rtk` (NOT `reachingforthejack/rtk`)
+
+## Installation
+
+```powershell
+# Download latest Windows binary
+$version = "0.43.0"
+$url = "https://github.com/rtk-ai/rtk/releases/download/v$version/rtk-x86_64-pc-windows-msvc.zip"
+$tmp = "$env:TEMP\rtk.zip"
+Invoke-WebRequest $url -OutFile $tmp
+Expand-Archive $tmp -DestinationPath "$env:TEMP\rtk" -Force
+Copy-Item "$env:TEMP\rtk\rtk.exe" "$env:USERPROFILE\.cargo\bin\rtk.exe" -Force
+# Ensure ~\.cargo\bin is in PATH
+```
+
+## Verification
+
+```bash
+rtk --version   # Must output: rtk 0.43.0
+rtk gain        # Must show token savings stats
+```
+
+**CRITICAL**: If `rtk gain` fails, you have the WRONG `rtk` installed (Rust Type Kit).
+Uninstall immediately: `cargo uninstall rtk`
+
+## Mandatory Usage Rules
+
+### RULE 1: Use `rtk` as shell command proxy
+
+```bash
+# WRONG  — raw commands
+git status
+pnpm install
+vitest run
+
+# RIGHT  — through rtk
+rtk git status
+rtk pnpm install
+rtk vitest run
+```
+
+### RULE 2: All high-output commands must use rtk
+
+| Category | Commands |
+|----------|----------|
+| Git | `rtk git status`, `rtk git diff`, `rtk git log`, `rtk git add`, `rtk git commit`, `rtk git push` |
+| Package Manager | `rtk pnpm install`, `rtk pnpm list`, `rtk pnpm outdated` |
+| Testing | `rtk vitest`, `rtk jest`, `rtk playwright test` |
+| File Ops | `rtk ls`, `rtk read`, `rtk grep` |
+| Build | `rtk cargo build`, `rtk pnpm build` |
+
+### RULE 3: Verify after every session
+
+```bash
+rtk gain            # Show token savings
+rtk gain --history  # Show command history
+```
+
+## Token Savings (Real Benchmarks)
+
+| Operation | Without RTK | With RTK | Reduction |
+|-----------|------------|----------|-----------|
+| `vitest` | 102,199 chars | 377 chars | **-99.6%** |
+| `git status` | 529 chars | 217 chars | **-59%** |
+| `pnpm list` | ~8,000 tokens | ~2,400 tokens | **-70%** |
+| `pnpm outdated` | ~12,000 tokens | ~1,200-2,400 tokens | **-80–90%** |
+| 30 min session | ~150,000 tokens | ~45,000 tokens | **-70%** |
+
+---
+
+# Execution Order
+
+Both tools form the **mandatory toolchain gate** below the Orchestrator:
+
+```
+    CAVEMAN HOOKS  ──►  validates session, enforces scope
+            │
+    ORCHESTRATOR   ──►  selects agents, coordinates workflow
+            │
+    RTK (all commands) ──►  reduces token output 60–99%
+            │
+    ── Layer Architecture ──
+```
+
+An agent that does not pass through **both** Caveman and RTK is in violation.
+
+---
+
+# Quick Reference Card
+
+<table>
+<tr><th>Tool</th><th>Purpose</th><th>Install</th><th>Verify</th></tr>
+<tr><td><b>Caveman</b></td><td>Workflow hooks, scope enforcement</td><td><code>install.ps1</code></td><td>Plugin visible in agent settings</td></tr>
+<tr><td><b>RTK</b></td><td>Token reduction, command filtering</td><td>GitHub Release binary</td><td><code>rtk gain</code></td></tr>
+</table>
+
+**Both are mandatory. Zero tolerance for non-compliance.**
+
+---
+
 End of Agent Architecture v2

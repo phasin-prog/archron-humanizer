@@ -16,7 +16,8 @@
     "typescript": "^6.0",
     "vitest": "^4",
     "drizzle-kit": "^0.31",
-    "eslint": "^10"
+    "eslint": "^10",
+    "@types/node": "^24"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

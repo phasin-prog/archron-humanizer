@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "@archron/shared": "workspace:*",
-    "@archron/database": "workspace:*"
+    "@archron/database": "workspace:*",
+    "drizzle-orm": "^0.45"
   },
   "devDependencies": {
     "typescript": "^6.0",

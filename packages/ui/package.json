@@ -8,13 +8,19 @@
     }
   },
   "dependencies": {
-    "@archron/shared": "workspace:*"
+    "@archron/shared": "workspace:*",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.23.0",
+    "react": "^19.2.7",
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
-    "typescript": "^6.0",
-    "vitest": "^4",
+    "@testing-library/react": "^16",
+    "@types/react": "^19.2.17",
     "eslint": "^10",
-    "@testing-library/react": "^16"
+    "typescript": "^6.0",
+    "vitest": "^4"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
