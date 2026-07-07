@@ -1,5 +1,8 @@
 // Core exports
 export * from "./types"
+export * from "./types/knowledge"
+export * from "./types/content"
+export * from "./types/social"
 export * from "./constants"
 export * from "./utils"
 export * from "./integration"
@@ -11,12 +14,8 @@ export type {
   ObjectType,
   ObjectStatus,
   BaseObject,
-  ObjectQuery,
-  ObjectResult,
   RelationType,
   Relationship,
-  RelationQuery,
-  RelationResult,
   UserRole,
   Role,
   UserProfile,
@@ -26,6 +25,9 @@ export type {
   SearchResponse,
   AutocompleteResult,
 } from "./types"
+
+// Re-export knowledge types (ObjectQuery, ObjectResult, RelationQuery, RelationResult come from here)
+export type { ObjectQuery, ObjectResult, RelationQuery, RelationResult } from "./types/knowledge"
 
 // Re-export constants
 export { Roles, RoleHierarchy } from "./types"
