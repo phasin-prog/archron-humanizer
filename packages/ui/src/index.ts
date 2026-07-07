@@ -61,6 +61,29 @@ export {
   PaginationItem,
   PaginationPrevious,
   PaginationNext,
+  Breadcrumbs,
+  BreadcrumbItem,
+  BreadcrumbSeparator,
+  Tag,
+  tagVariants,
+  Divider,
+  dividerVariants,
+  Chip,
+  chipVariants,
+  Skeleton,
+  skeletonVariants,
+  Progress,
+  ScrollArea,
+  scrollAreaVariants,
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+  TOC,
+  TOCItem,
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+  avatarVariants,
 } from "./components/ui"
 
 export type {
@@ -90,10 +113,27 @@ export type {
   PaginationProps,
   PaginationItemProps,
   PaginationNavProps,
+  BreadcrumbsProps,
+  BreadcrumbItemProps,
+  BreadcrumbSeparatorProps,
+  TagProps,
+  DividerProps,
+  ChipProps,
+  SkeletonProps,
+  ProgressProps,
+  ScrollAreaProps,
+  CollapsibleProps,
+  CollapsibleTriggerProps,
+  CollapsibleContentProps,
+  TOCProps,
+  TOCItemProps,
+  AvatarProps,
+  AvatarImageProps,
+  AvatarFallbackProps,
 } from "./components/ui"
 
-export { ConceptCard, ThinkerCard, KnowledgeCard } from "./components/knowledge"
-export type { ConceptCardProps, ThinkerCardProps, KnowledgeCardProps } from "./components/knowledge"
+export { ConceptCard, ThinkerCard, KnowledgeCard, SchoolCard, ArticleCard } from "./components/knowledge"
+export type { ConceptCardProps, ThinkerCardProps, KnowledgeCardProps, SchoolCardProps, ArticleCardProps } from "./components/knowledge"
 
 export {
   Icon,
