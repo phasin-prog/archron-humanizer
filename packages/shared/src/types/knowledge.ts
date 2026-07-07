@@ -114,3 +114,63 @@ export type KnowledgeObject =
   | TimelineEvent
   | Glossary
   | Term
+
+export interface ObjectQuery {
+  ids?: string[]
+  slugs?: string[]
+  types?: ObjectType[]
+  status?: string[]
+  language?: string
+  difficulty?: string
+  domains?: string[]
+  tags?: string[]
+  limit?: number
+  offset?: number
+  sort?: "recent" | "title" | "backlinks" | "views"
+  includeDeleted?: boolean
+}
+
+export interface ObjectResult {
+  id: string
+  objectType: ObjectType
+  slug: string
+  title: string
+  status: string
+  visibility: string
+  language: string
+  difficulty: string
+  description: string
+  aliases: string[]
+  domains: string[]
+  tags: string[]
+  thumbnail?: string
+  readingTime?: number
+  wordCount?: number
+  viewCount: number
+  backlinkCount: number
+  version: number
+  authorId?: string
+  editorId?: string
+  publishedAt?: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface RelationQuery {
+  objectId: string
+  relationTypes?: string[]
+  direction?: "outgoing" | "incoming" | "both"
+  limit?: number
+  offset?: number
+}
+
+export interface RelationResult {
+  id: string
+  sourceId: string
+  targetId: string
+  relationType: string
+  weight: string
+  confidence: string
+  source?: ObjectResult
+  target?: ObjectResult
+}

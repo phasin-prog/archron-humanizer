@@ -1,62 +1,5 @@
-export interface ObjectQuery {
-  ids?: string[]
-  slugs?: string[]
-  types?: string[]
-  status?: string[]
-  language?: string
-  difficulty?: string
-  domains?: string[]
-  tags?: string[]
-  limit?: number
-  offset?: number
-  sort?: "recent" | "title" | "backlinks" | "views"
-  includeDeleted?: boolean
-}
-
-export interface ObjectResult {
-  id: string
-  objectType: string
-  slug: string
-  title: string
-  status: string
-  visibility: string
-  language: string
-  difficulty: string
-  description: string
-  aliases: string[]
-  domains: string[]
-  tags: string[]
-  thumbnail?: string
-  readingTime?: number
-  wordCount?: number
-  viewCount: number
-  backlinkCount: number
-  version: number
-  authorId?: string
-  editorId?: string
-  publishedAt?: string
-  createdAt: string
-  updatedAt: string
-}
-
-export interface RelationQuery {
-  objectId: string
-  relationTypes?: string[]
-  direction?: "outgoing" | "incoming" | "both"
-  limit?: number
-  offset?: number
-}
-
-export interface RelationResult {
-  id: string
-  sourceId: string
-  targetId: string
-  relationType: string
-  weight: string
-  confidence: string
-  source?: ObjectResult
-  target?: ObjectResult
-}
+import type { ObjectResult, RelationQuery, RelationResult } from "@archron/shared"
+export type { ObjectQuery, ObjectResult, RelationQuery, RelationResult } from "@archron/shared"
 
 export interface KnowledgeEngineOptions {
   db: unknown
@@ -65,12 +8,11 @@ export interface KnowledgeEngineOptions {
 }
 
 export class KnowledgeEngine {
-  private db: unknown
   private searchEngine: unknown
   private cache: Map<string, unknown>
 
   constructor(options: KnowledgeEngineOptions) {
-    this.db = options.db
+    void options.db
     this.searchEngine = options.searchEngine
     this.cache = options.cache ?? new Map()
   }
@@ -141,12 +83,4 @@ export class KnowledgeEngine {
   getCacheSize(): number {
     return this.cache.size
   }
-}
-
-export type {
-  ObjectQuery,
-  ObjectResult,
-  RelationQuery,
-  RelationResult,
-  KnowledgeEngineOptions,
 }
