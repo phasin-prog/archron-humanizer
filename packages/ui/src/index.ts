@@ -53,6 +53,10 @@ export {
   CommandEmpty,
   CommandGroup,
   CommandItem,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
 } from "./components/ui"
 
 export type {
@@ -75,7 +79,11 @@ export type {
   LabelProps,
   DialogProps,
   SheetProps,
+  TabsProps,
+  TabsListProps,
+  TabsTriggerProps,
+  TabsContentProps,
 } from "./components/ui"
 
-export { ConceptCard, ThinkerCard } from "./components/knowledge"
-export type { ConceptCardProps, ThinkerCardProps } from "./components/knowledge"
+export { ConceptCard, ThinkerCard, KnowledgeCard } from "./components/knowledge"
+export type { ConceptCardProps, ThinkerCardProps, KnowledgeCardProps } from "./components/knowledge"
