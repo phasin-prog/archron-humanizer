@@ -1,37 +1,120 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #FAF8F5;
-  --color-bg-card: #FFFFFF;
-  --color-bg-elevated: #F5F3F0;
-  --color-border: #E5E2DC;
-  --color-text-secondary: #8A8780;
-  --color-text-body: #3A3835;
-  --color-text-heading: #1A1815;
+  /* ============================================
+     FOUNDATION — 85% Neutral
+     ============================================ */
 
-  --color-accent: #8B5E3C;
-  --color-accent-hover: #7A4E2E;
-  --color-accent-subtle: #F5EDE5;
+  --color-background: #141821;
+  --color-foreground: #ECEFF4;
 
-  --color-concept: #5B7FAB;
-  --color-thinker: #5A8A6A;
-  --color-theory: #8A7AB5;
-  --color-school: #5A8A8A;
-  --color-book: #B58A5A;
-  --color-article: #AB6B7A;
-  --color-symbol: #C4A040;
-  --color-timeline: #6A7A8A;
-  --color-quote: #7A9A7A;
-  --color-guide: #6A7AB5;
+  --color-surface: #1A1F29;
+  --color-card: #202633;
+  --color-elevated: #262D3A;
+  --color-muted: #262D3A;
+  --color-muted-foreground: #9098A5;
 
-  --color-success: #4A8A5A;
-  --color-warning: #C48A30;
-  --color-error: #B55A5A;
-  --color-info: #5A7AAA;
+  --color-border: #2D3645;
+  --color-border-soft: #242B36;
+  --color-input: #242B36;
+
+  --color-ring: #C49B55;
+
+  /* ============================================
+     TYPOGRAPHY — 10%
+     ============================================ */
+
+  --color-text: #ECEFF4;
+  --color-text-secondary: #C7CDD7;
+  --color-text-muted: #9098A5;
+  --color-text-disabled: #636B78;
+
+  /* ============================================
+     BRAND — 1% Gold Accent
+     ============================================ */
+
+  --color-primary: #C49B55;
+  --color-primary-foreground: #141821;
+  --color-primary-hover: #D6AE69;
+  --color-primary-soft: #4F3C20;
+
+  --color-accent: #C49B55;
+  --color-accent-foreground: #141821;
+  --color-accent-hover: #D6AE69;
+  --color-accent-soft: #4F3C20;
+
+  /* ============================================
+     STATUS — 4% Semantic
+     ============================================ */
+
+  --color-success: #22C55E;
+  --color-success-foreground: #141821;
+  --color-warning: #F59E0B;
+  --color-warning-foreground: #141821;
+  --color-destructive: #EF4444;
+  --color-destructive-foreground: #ECEFF4;
+  --color-danger: #EF4444;
+  --color-info: #38BDF8;
+  --color-info-foreground: #141821;
+
+  /* ============================================
+     OVERLAY
+     ============================================ */
+
+  --color-overlay: rgba(10, 12, 18, 0.72);
+  --color-shadow: rgba(0, 0, 0, 0.45);
+
+  /* ============================================
+     KNOWLEDGE DOMAINS — 12 Colors
+     ============================================ */
+
+  --color-domain-psychology: #34D3F5;
+  --color-domain-philosophy: #A78BFA;
+  --color-domain-anthropology: #FB923C;
+  --color-domain-history: #D97706;
+  --color-domain-language: #10B981;
+  --color-domain-mythology: #DC2626;
+  --color-domain-religion: #8B5CF6;
+  --color-domain-science: #06B6D4;
+  --color-domain-symbolism: #4F46E5;
+  --color-domain-art: #EC4899;
+  --color-domain-ai: #6366F1;
+  --color-domain-civilization: #64748B;
+
+  /* ============================================
+     KNOWLEDGE OBJECTS — 9 Colors
+     ============================================ */
+
+  --color-concept: #38BDF8;
+  --color-thinker: #A78BFA;
+  --color-article: #CBD5E1;
+  --color-book: #FB923C;
+  --color-quote: #94A3B8;
+  --color-timeline: #EAB308;
+  --color-guide: #10B981;
+  --color-symbol: #6366F1;
+  --color-collection: #F472B6;
+
+  /* ============================================
+     HERO
+     ============================================ */
+
+  --color-hero-gradient-top: #171C25;
+  --color-hero-gradient-bottom: #11151D;
+  --color-hero-grid: rgba(255, 255, 255, 0.035);
+  --color-hero-constellation: rgba(255, 255, 255, 0.08);
+  --color-hero-node: rgba(255, 255, 255, 0.12);
+  --color-hero-glow: rgba(196, 155, 85, 0.10);
+
+  /* ============================================
+     TYPOGRAPHY
+     ============================================ */
 
   --font-display: "Playfair Display", "Lora", "Georgia", serif;
   --font-heading: "Inter", "system-ui", sans-serif;
+  --font-sans: "Inter", "system-ui", sans-serif;
   --font-body: "Lora", "Source Serif 4", "Georgia", serif;
+  --font-serif: "Playfair Display", "Lora", "Georgia", serif;
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
 
   --text-display: 48px;
@@ -53,21 +136,37 @@
   --text-meta: 12px;
   --text-meta--line-height: 16px;
 
+  /* ============================================
+     LAYOUT
+     ============================================ */
+
   --container-reading: 720px;
   --container-page: 1280px;
+
+  /* ============================================
+     RADIUS
+     ============================================ */
+
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* ============================================
+     SHADOW
+     ============================================ */
+
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.24);
+  --shadow-large: 0 8px 32px rgba(0, 0, 0, 0.48);
+  --shadow-glow: 0 0 24px var(--color-hero-glow);
 }
 
-@variant dark {
-  --color-bg: #1A1A1A;
-  --color-bg-card: #242424;
-  --color-bg-elevated: #2A2A2A;
-  --color-border: #3A3A3A;
-  --color-text-secondary: #8A8A8A;
-  --color-text-body: #C8C8C8;
-  --color-text-heading: #E8E8E8;
-  --color-accent: #C4A882;
-  --color-accent-subtle: #2A221A;
-}
+/* ============================================
+   BASE LAYER
+   ============================================ */
 
 @layer base {
   * {
@@ -75,10 +174,51 @@
   }
 
   body {
-    background-color: var(--color-bg);
-    color: var(--color-text-body);
-    font-family: var(--font-body);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  ::selection {
+    background-color: var(--color-primary-soft);
+    color: var(--color-primary);
+  }
+}
+
+/* ============================================
+   MOTION TOKENS (CSS Variables)
+   ============================================ */
+
+:root {
+  --motion-fast: 120ms;
+  --motion-normal: 220ms;
+  --motion-slow: 420ms;
+  --motion-ambient: 14000ms;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
 }
