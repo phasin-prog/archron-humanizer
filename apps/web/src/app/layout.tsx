@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 import { ArchronClerkProvider } from "@archron/auth/client"
+import { Navbar } from "@/components/layout/navbar"
+import { BottomNav } from "@/components/layout/bottom-nav"
 import "@/styles/globals.css"
 
 export const metadata: Metadata = {
@@ -12,7 +14,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="th" suppressHydrationWarning className="dark">
       <body className="min-h-screen bg-background text-text font-sans antialiased">
         <ArchronClerkProvider>
-          {children}
+          <Navbar />
+          <main id="main-content">{children}</main>
+          <BottomNav />
         </ArchronClerkProvider>
       </body>
     </html>
