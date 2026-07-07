@@ -3,6 +3,7 @@ import type { SQL } from "drizzle-orm"
 import type { ObjectQuery, ObjectResult } from "@archron/shared"
 import type { DB } from "./db"
 import { objects } from "./schema/core"
+import { contentStateEnum, languageEnum, difficultyEnum } from "./schema/enums"
 import * as knowledge from "./schema/knowledge"
 
 type DomainTable =
@@ -34,35 +35,34 @@ function getDomainTable(objectType: string): DomainTable | null {
   return DOMAIN_MAP[objectType] ?? null
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function mapObjectRow(row: any): ObjectResult {
+function mapObjectRow(row: Record<string, unknown>): ObjectResult {
   const result: ObjectResult = {
-    id: row.id,
+    id: row.id as ObjectResult["id"],
     objectType: row.objectType as ObjectResult["objectType"],
-    slug: row.slug,
-    title: row.title,
-    status: row.status,
-    visibility: row.visibility,
-    language: row.language,
-    difficulty: row.difficulty,
-    description: row.description,
-    aliases: row.aliases ?? [],
-    domains: row.domains ?? [],
-    tags: row.tags ?? [],
-    thumbnail: row.thumbnail,
-    readingTime: row.readingTime,
-    wordCount: row.wordCount,
-    viewCount: row.viewCount,
-    backlinkCount: row.backlinkCount,
-    version: row.version,
-    authorId: row.authorId,
-    editorId: row.editorId,
+    slug: row.slug as ObjectResult["slug"],
+    title: row.title as ObjectResult["title"],
+    status: row.status as ObjectResult["status"],
+    visibility: row.visibility as ObjectResult["visibility"],
+    language: row.language as ObjectResult["language"],
+    difficulty: row.difficulty as ObjectResult["difficulty"],
+    description: row.description as ObjectResult["description"],
+    aliases: (row.aliases ?? []) as ObjectResult["aliases"],
+    domains: (row.domains ?? []) as ObjectResult["domains"],
+    tags: (row.tags ?? []) as ObjectResult["tags"],
+    thumbnail: row.thumbnail as ObjectResult["thumbnail"],
+    readingTime: row.readingTime as ObjectResult["readingTime"],
+    wordCount: row.wordCount as ObjectResult["wordCount"],
+    viewCount: row.viewCount as ObjectResult["viewCount"],
+    backlinkCount: row.backlinkCount as ObjectResult["backlinkCount"],
+    version: row.version as ObjectResult["version"],
+    authorId: row.authorId as ObjectResult["authorId"],
+    editorId: row.editorId as ObjectResult["editorId"],
     publishedAt:
-      row.publishedAt?.toISOString?.() ?? row.publishedAt,
+      (row.publishedAt as Date | undefined)?.toISOString?.() ?? (row.publishedAt as string | undefined),
     createdAt:
-      row.createdAt?.toISOString?.() ?? row.createdAt,
+      (row.createdAt as Date)?.toISOString?.() ?? (row.createdAt as string),
     updatedAt:
-      row.updatedAt?.toISOString?.() ?? row.updatedAt,
+      (row.updatedAt as Date)?.toISOString?.() ?? (row.updatedAt as string),
   }
   return result
 }
@@ -168,11 +168,11 @@ export async function createObject(
         title: data.title,
         description: data.description,
         authorId: data.authorId,
-        status: (data.status ?? "draft") as "draft" | "review" | "published" | "archived",
+        status: (data.status ?? "draft") as typeof contentStateEnum.enumValues[number],
         visibility: data.visibility ?? "public",
-        language: (data.language ?? "th") as "th" | "en",
+        language: (data.language ?? "th") as typeof languageEnum.enumValues[number],
         difficulty:
-          (data.difficulty ?? "intermediate") as "beginner" | "intermediate" | "advanced",
+          (data.difficulty ?? "intermediate") as typeof difficultyEnum.enumValues[number],
         aliases: data.aliases ?? [],
         domains: data.domains ?? [],
         tags: data.tags ?? [],
@@ -207,13 +207,13 @@ export async function updateObject(
   id: string,
   data: Partial<CreateObjectData>,
 ): Promise<ObjectResult | null> {
-  const setData: Record<string, unknown> = {}
+  const setData: Partial<typeof objects.$inferInsert> = {}
   if (data.title !== undefined) setData.title = data.title
   if (data.description !== undefined) setData.description = data.description
-  if (data.status !== undefined) setData.status = data.status
+  if (data.status !== undefined) setData.status = data.status as typeof contentStateEnum.enumValues[number]
   if (data.visibility !== undefined) setData.visibility = data.visibility
-  if (data.language !== undefined) setData.language = data.language
-  if (data.difficulty !== undefined) setData.difficulty = data.difficulty
+  if (data.language !== undefined) setData.language = data.language as typeof languageEnum.enumValues[number]
+  if (data.difficulty !== undefined) setData.difficulty = data.difficulty as typeof difficultyEnum.enumValues[number]
   if (data.aliases !== undefined) setData.aliases = data.aliases
   if (data.domains !== undefined) setData.domains = data.domains
   if (data.tags !== undefined) setData.tags = data.tags
@@ -221,8 +221,7 @@ export async function updateObject(
   if (data.readingTime !== undefined) setData.readingTime = data.readingTime
   if (data.wordCount !== undefined) setData.wordCount = data.wordCount
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const rows = await db.update(objects).set(setData as any).where(eq(objects.id, id)).returning()
+  const rows = await db.update(objects).set(setData).where(eq(objects.id, id)).returning()
   const obj = rows[0]
   if (!obj) return null
   return mapObjectRow(obj)

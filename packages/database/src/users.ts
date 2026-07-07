@@ -64,9 +64,17 @@ export async function findOrCreateUser(
   clerkId: string,
   email: string,
 ): Promise<typeof users.$inferSelect> {
+  const [inserted] = await db
+    .insert(users)
+    .values({ clerkId, email, role: "member" as UserRole })
+    .onConflictDoNothing()
+    .returning()
+
+  if (inserted) return inserted
+
   const existing = await findUserByClerkId(db, clerkId)
-  if (existing) return existing
-  return createUser(db, { clerkId, email })
+  if (!existing) throw new Error("Failed to find or create user")
+  return existing
 }
 
 export async function updateProfile(

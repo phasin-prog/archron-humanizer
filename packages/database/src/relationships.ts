@@ -1,17 +1,17 @@
-import { eq, and, inArray, sql } from "drizzle-orm"
+import { eq, and, sql } from "drizzle-orm"
 import type { RelationQuery, RelationResult } from "@archron/shared"
 import type { DB } from "./db"
 import { objects } from "./schema/core"
 import { relationships, graphNodes, graphEdges } from "./schema/relationships"
 
-function mapRelationRow(row: any): RelationResult {
+function mapRelationRow(row: Record<string, unknown>): RelationResult {
   return {
-    id: row.id,
-    sourceId: row.source_id,
-    targetId: row.target_id,
-    relationType: row.relation_type,
-    weight: row.weight,
-    confidence: row.confidence,
+    id: row.id as RelationResult["id"],
+    sourceId: row.source_id as RelationResult["sourceId"],
+    targetId: row.target_id as RelationResult["targetId"],
+    relationType: row.relation_type as RelationResult["relationType"],
+    weight: row.weight as RelationResult["weight"],
+    confidence: row.confidence as RelationResult["confidence"],
   }
 }
 
@@ -33,7 +33,7 @@ export async function findRelations(
   }
 
   if (relationTypes?.length) {
-    conditions.push(inArray(relationships.relationType, relationTypes as any))
+    conditions.push(sql`${relationships.relationType} = ANY(${relationTypes})`)
   }
 
   const rows = await db

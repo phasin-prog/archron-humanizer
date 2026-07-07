@@ -1,4 +1,4 @@
-import { eq, asc, sql } from "drizzle-orm"
+import { eq, asc, and, sql } from "drizzle-orm"
 import type { DB } from "./db"
 import {
   collections,
@@ -125,7 +125,8 @@ export async function listGuides(
   return db
     .select()
     .from(guides)
-    .where(conditions.length > 0 ? conditions.reduce((a, b) => sql`${a} AND ${b}`) : undefined)
+    .where(conditions.length > 0 ? and(...conditions) : undefined)
+    .orderBy(asc(guides.createdAt))
     .limit(query.limit ?? 20)
     .offset(query.offset ?? 0)
 }
