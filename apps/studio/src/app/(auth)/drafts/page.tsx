@@ -1,6 +1,7 @@
 
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardTitle, Badge, Button, Select } from "@archron/ui"
+import { StudioBreadcrumbs } from "@/components/studio/breadcrumbs"
 import type { SelectOption } from "@archron/ui"
 
 const STATUS_OPTIONS: SelectOption[] = [
@@ -29,6 +30,7 @@ const STATUS_VARIANT: Record<string, "warning" | "success" | "secondary" | "dest
 export default function DraftsPage() {
   return (
     <div className="mx-auto max-w-5xl space-y-6 p-6">
+      <StudioBreadcrumbs />
       <div className="flex items-center justify-between">
         <h1 className="text-page-title font-serif font-bold">Drafts</h1>
         <Link href="/studio/drafts/new">
@@ -48,10 +50,10 @@ export default function DraftsPage() {
       <div className="space-y-3">
         {DRAFTS.map((draft) => (
           <Link key={draft.id} href={`/studio/drafts/${draft.id}`}>
-            <Card className="cursor-pointer transition-colors hover:border-primary/50">
+            <Card className="cursor-pointer transition-colors hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background">
               <CardContent className="flex items-center justify-between p-4">
                 <div className="min-w-0 flex-1">
-                  <CardTitle className="text-card-title truncate">{draft.title}</CardTitle>
+                  <CardTitle className="text-card-title truncate" title={draft.title}>{draft.title}</CardTitle>
                   <CardDescription className="mt-1">{draft.slug}</CardDescription>
                 </div>
                 <div className="flex items-center gap-4 text-caption text-muted-foreground">

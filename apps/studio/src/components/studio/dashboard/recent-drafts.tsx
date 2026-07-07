@@ -11,12 +11,12 @@ const DRAFTS = [
 
 export function RecentDrafts(): React.ReactElement {
   return (
-    <section>
-      <h2 className="mb-3 text-section-title font-serif font-semibold">Recent Drafts</h2>
+    <section aria-labelledby="recent-drafts-heading">
+      <h2 id="recent-drafts-heading" className="mb-3 text-section-title font-serif font-semibold">Recent Drafts</h2>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {DRAFTS.map((draft) => (
           <Link key={draft.id} href={`/studio/drafts/${draft.id}`}>
-            <Card className="cursor-pointer transition-colors hover:border-primary/50">
+            <Card className="cursor-pointer transition-colors hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background">
               <CardContent className="p-4">
                 <CardTitle className="text-card-title">{draft.title}</CardTitle>
                 <CardDescription className="mt-1 flex items-center gap-2">

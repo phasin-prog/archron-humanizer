@@ -1,17 +1,21 @@
 import React from "react"
 import { cn } from "../../lib/utils"
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  disabled?: boolean
+}
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, disabled, ...props }, ref) => {
     return (
       <div
         ref={ref}
         className={cn(
           "rounded-xl border bg-card text-card-foreground shadow",
+          disabled && "opacity-60 pointer-events-none cursor-not-allowed",
           className
         )}
+        data-disabled={disabled}
         {...props}
       />
     )

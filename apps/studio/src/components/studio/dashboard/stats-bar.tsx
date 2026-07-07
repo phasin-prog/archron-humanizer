@@ -9,8 +9,8 @@ const STATS = [
 
 export function StatsBar(): React.ReactElement {
   return (
-    <section>
-      <h2 className="mb-3 text-section-title font-serif font-semibold">Stats</h2>
+    <section aria-labelledby="stats-heading">
+      <h2 id="stats-heading" className="mb-3 text-section-title font-serif font-semibold">Stats</h2>
       <div className="space-y-3">
         {STATS.map((stat) => (
           <Card key={stat.label}>

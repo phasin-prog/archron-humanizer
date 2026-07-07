@@ -15,8 +15,8 @@ const STATUS_VARIANT: Record<string, "info" | "warning" | "success"> = {
 
 export function PublishingQueue(): React.ReactElement {
   return (
-    <section>
-      <h2 className="mb-3 text-section-title font-serif font-semibold">Publishing Queue</h2>
+    <section aria-labelledby="publishing-queue-heading">
+      <h2 id="publishing-queue-heading" className="mb-3 text-section-title font-serif font-semibold">Publishing Queue</h2>
       <div className="space-y-3">
         {QUEUE_ITEMS.map((item) => (
           <Card key={item.id}>

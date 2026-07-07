@@ -37,23 +37,25 @@ export function DraftsTab() {
 
   return (
     <div className="space-y-4">
-      <div className="flex gap-4">
+      <form role="search" className="flex gap-4">
         <Input
           placeholder="Search drafts..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="max-w-xs"
+          aria-label="Search drafts"
         />
         <Select
           options={statusOptions}
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           className="max-w-[180px]"
+          aria-label="Filter by status"
         />
-      </div>
+      </form>
       <div className="space-y-2">
         {filtered.map((draft) => (
-          <Card key={draft.id} className="hover:shadow-md transition-shadow cursor-pointer">
+          <Card key={draft.id} className="cursor-pointer transition-colors hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background" tabIndex={0} role="button">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-base">{draft.title}</CardTitle>
               <Badge variant={statusVariant[draft.status] ?? "default"}>
