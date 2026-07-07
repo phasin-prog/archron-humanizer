@@ -14,12 +14,14 @@
     "react-dom": "^19",
     "@archron/shared": "workspace:*",
     "@archron/database": "workspace:*",
+    "@clerk/nextjs": "^7.5.12",
     "@archron/auth": "workspace:*",
     "@archron/search": "workspace:*",
     "@archron/renderer": "workspace:*",
     "@archron/ui": "workspace:*",
     "@archron/editor": "workspace:*",
-    "@archron/knowledge-engine": "workspace:*"
+    "@archron/knowledge-engine": "workspace:*",
+    "drizzle-orm": "^0.45"
   },
   "devDependencies": {
     "typescript": "^6.0",
