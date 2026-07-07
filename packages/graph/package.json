@@ -15,7 +15,9 @@
     "typescript": "^6.0",
     "vitest": "^4",
     "eslint": "^10",
-    "@types/three": "^0.185"
+    "@types/three": "^0.185",
+    "@archron/vitest": "workspace:*",
+    "jsdom": "^25"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation"
 import type { SchoolCardProps, ThinkerCardProps, ArticleCardProps, IconProps } from "@archron/ui"
 import {
-  PsychologyGlyph,
-  PhilosophyGlyph,
+  PsychologyIcon,
+  PhilosophyIcon,
   SchoolCard,
   ThinkerCard,
   ArticleCard,
@@ -28,7 +28,7 @@ const disciplines: Record<string, DisciplineData> = {
     name: "Psychology",
     slug: "psychology",
     color: "#34D3F5",
-    glyph: PsychologyGlyph,
+    glyph: PsychologyIcon,
     description: "The scientific study of the mind and behavior — exploring consciousness, cognition, emotion, and the depths of the human psyche.",
     schools: [
       { slug: "analytical-psychology", title: "Analytical Psychology", period: "1913-Present", location: "Zurich", keyThinkersCount: 5, methodology: "Founded by Carl Jung, exploring the collective unconscious, archetypes, and the process of individuation as the path toward psychological wholeness." },
@@ -61,7 +61,7 @@ const disciplines: Record<string, DisciplineData> = {
     name: "Philosophy",
     slug: "philosophy",
     color: "#A78BFA",
-    glyph: PhilosophyGlyph,
+    glyph: PhilosophyIcon,
     description: "The love of wisdom — exploring existence, knowledge, values, reason, mind, and language through systematic inquiry and critical reflection.",
     schools: [
       { slug: "existentialism", title: "Existentialism", period: "19th-20th Century", location: "Europe", keyThinkersCount: 7, methodology: "Examining individual existence, freedom, and choice. Key themes include authenticity, absurdity, and the responsibility to create meaning." },

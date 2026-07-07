@@ -21,7 +21,8 @@
     "vitest": "^4",
     "drizzle-kit": "^0.31",
     "eslint": "^10",
-    "@types/node": "^24"
+    "@types/node": "^24",
+    "@archron/vitest": "workspace:*"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

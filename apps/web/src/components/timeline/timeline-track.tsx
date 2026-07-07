@@ -140,7 +140,7 @@ export function TimelineTrack({ events, eras, className }: TimelineTrackProps) {
             <div key={event.id}>
               <div
                 className={cn(
-                  "absolute bottom-0 -translate-x-1/2 translate-y-1/2 z-10",
+                  "absolute bottom-0 -translate-x-1/2 translate-y-1/2 z-[var(--z-base)]",
                   "size-3 rounded-full border-2 border-border bg-card cursor-pointer",
                   "transition-all duration-[var(--motion-fast)]",
                   "hover:scale-150 hover:shadow-glow"
@@ -186,7 +186,7 @@ export function TimelineTrack({ events, eras, className }: TimelineTrackProps) {
 
               {isSelected && (
                 <div
-                  className="absolute bottom-16 -translate-x-1/2 z-20"
+                  className="absolute bottom-16 -translate-x-1/2 z-[var(--z-dropdown)]"
                   style={{ left: `${left}%` }}
                 >
                   <div className="w-64 rounded-xl border border-border bg-card p-4 shadow-medium">

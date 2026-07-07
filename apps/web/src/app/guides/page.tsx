@@ -6,7 +6,7 @@ import {
   CardDescription,
   CardContent,
   Badge,
-  KnowledgeGuideIcon,
+  GuideIcon,
 } from "@archron/ui"
 
 const guides = [
@@ -105,7 +105,7 @@ export default function GuidesPage() {
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <KnowledgeGuideIcon size="sm" className="text-primary" />
+                        <GuideIcon size="sm" className="text-primary" />
                         <Badge
                           variant="outline"
                           className="text-meta font-medium"

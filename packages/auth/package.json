@@ -23,7 +23,8 @@
     "eslint": "^10",
     "next": "^16.2.10",
     "typescript": "^6.0",
-    "vitest": "^4"
+    "vitest": "^4",
+    "@archron/vitest": "workspace:*"
   },
   "peerDependencies": {
     "next": "^16",

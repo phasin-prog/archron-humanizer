@@ -149,6 +149,12 @@ Responsibilities
 - Motion
 - Layout
 
+Must follow
+
+- `docs/DESIGN-CONSTITUTION.md` (mandatory)
+- All color decisions validated against constitution
+- No deviation without documented reason
+
 ---
 
 ## Studio Architect

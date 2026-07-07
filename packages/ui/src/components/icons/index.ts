@@ -54,16 +54,36 @@ export {
 } from "./knowledge"
 
 export {
-  PsychologyGlyph,
-  PhilosophyGlyph,
-  AnthropologyGlyph,
-  HistoryGlyph,
-  LanguageGlyph,
-  MythologyGlyph,
-  ReligionGlyph,
-  ScienceGlyph,
-  SymbolismGlyph,
-  ArtGlyph,
-  AIGlyph,
-  CivilizationGlyph,
+  PsychologyIcon,
+  PhilosophyIcon,
+  AnthropologyIcon,
+  HistoryIcon,
+  LanguageIcon,
+  MythologyIcon,
+  ReligionIcon,
+  ScienceIcon,
+  SymbolismIcon,
+  ArtIcon,
+  AIIcon,
+  CivilizationIcon,
 } from "./domains"
+
+export {
+  ConstellationIcon,
+  ReadIcon,
+  BookmarkIcon,
+  ShareIcon,
+  EditIcon,
+  DeleteIcon,
+  FilterIcon,
+  SortIcon,
+} from "./actions"
+
+export {
+  ProgressIcon,
+  CompleteIcon,
+  DraftIcon,
+  PublishedIcon,
+  FeaturedIcon,
+  ArchivedIcon,
+} from "./status"

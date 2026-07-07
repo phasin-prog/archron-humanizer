@@ -1,0 +1,1 @@
+export { createPluginRegistry } from "./registry";

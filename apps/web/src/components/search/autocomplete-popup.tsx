@@ -3,10 +3,10 @@
 import { useState, useEffect, useRef, useCallback } from "react"
 import Link from "next/link"
 import {
-  KnowledgeConceptIcon,
-  KnowledgeThinkerIcon,
-  KnowledgeBookIcon,
-  KnowledgeArticleIcon,
+  ConceptIcon,
+  ThinkerIcon,
+  BookIcon,
+  ArticleIcon,
   ArrowRightIcon,
 } from "@archron/ui"
 
@@ -37,10 +37,10 @@ interface AutocompletePopupProps {
 }
 
 const TYPE_ICONS: Record<ObjectType, React.ComponentType<{ size?: "sm" | "md" | "lg" | "xl"; className?: string }>> = {
-  concept: KnowledgeConceptIcon,
-  thinker: KnowledgeThinkerIcon,
-  book: KnowledgeBookIcon,
-  article: KnowledgeArticleIcon,
+  concept: ConceptIcon,
+  thinker: ThinkerIcon,
+  book: BookIcon,
+  article: ArticleIcon,
 }
 
 function flattenItems(groups: AutocompleteGroup[]): (AutocompleteItem & { groupType: ObjectType })[] {
@@ -145,7 +145,7 @@ export function AutocompletePopup({ query, open, onClose }: AutocompletePopupPro
   return (
     <div
       ref={ref}
-      className="absolute left-0 top-full z-50 mt-1 w-full rounded-xl border border-border bg-card shadow-lg"
+      className="absolute left-0 top-full z-[var(--z-dropdown)] mt-1 w-full rounded-xl border border-border bg-card shadow-lg"
       onKeyDown={handleKeyDown}
     >
       {loading && results.length === 0 ? (

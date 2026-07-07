@@ -32,10 +32,11 @@ export const RELATION_TYPE_LABELS: Record<string, string> = {
 
 export const USER_ROLE_PERMISSIONS = {
   guest: ["read"],
-  user: ["read", "bookmark", "comment"],
-  contributor: ["read", "bookmark", "comment", "create_draft"],
-  editor: ["read", "bookmark", "comment", "create_draft", "edit_own", "publish_own"],
-  admin: ["read", "bookmark", "comment", "create_draft", "edit_own", "publish_own", "edit_all", "publish_all", "delete", "manage_users"],
+  member: ["read", "bookmark", "comment"],
+  writer: ["read", "bookmark", "comment", "create_draft"],
+  reviewer: ["read", "bookmark", "comment", "create_draft", "review"],
+  editor: ["read", "bookmark", "comment", "create_draft", "review", "edit_own", "publish_own"],
+  administrator: ["read", "bookmark", "comment", "create_draft", "review", "edit_own", "publish_own", "edit_all", "publish_all", "delete", "manage_users"],
 } as const
 
 export const DEFAULT_PAGE_SIZE = 20

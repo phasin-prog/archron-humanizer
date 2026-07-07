@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { SignedIn, SignedOut, SignInButton } from "@archron/auth/client"
 import { cn } from "@archron/ui"
-import { SearchIcon, ExploreIcon, SupportIcon, ProfileIcon } from "@archron/ui"
+import { SearchIcon, ExploreIcon, ShareIcon, ProfileIcon } from "@archron/ui"
 
 interface NavItem {
   href: string
@@ -18,7 +18,7 @@ export function BottomNav() {
   const items: NavItem[] = [
     { href: "/search", label: "Search", icon: SearchIcon },
     { href: "/guides", label: "Guides", icon: ExploreIcon },
-    { href: "/support", label: "Support", icon: SupportIcon },
+    { href: "/support", label: "Support", icon: ShareIcon },
   ]
 
   return (
@@ -26,7 +26,7 @@ export function BottomNav() {
       {/* Spacer so content doesn't hide behind bottom nav */}
       <div className="h-16 md:hidden" />
 
-      <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border/50 bg-background/90 backdrop-blur-md md:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 z-[var(--z-sticky)] border-t border-border/50 bg-background/90 backdrop-blur-md md:hidden">
         <div className="mx-auto flex h-16 max-w-lg items-center justify-around px-2">
           {items.map((item) => {
             const isActive = pathname === item.href || pathname.startsWith(item.href + "/")

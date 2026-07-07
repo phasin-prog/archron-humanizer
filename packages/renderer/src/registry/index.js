@@ -1,0 +1,1 @@
+export { createComponentRegistry } from "./components";

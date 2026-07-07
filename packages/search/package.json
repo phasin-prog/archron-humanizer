@@ -15,7 +15,8 @@
   "devDependencies": {
     "typescript": "^6.0",
     "vitest": "^4",
-    "eslint": "^10"
+    "eslint": "^10",
+    "@archron/vitest": "workspace:*"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

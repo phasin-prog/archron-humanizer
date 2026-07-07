@@ -1,0 +1,18 @@
+export const ObjectTypes = {
+    Concept: "concept",
+    Thinker: "thinker",
+    Theory: "theory",
+    School: "school",
+    Discipline: "discipline",
+    Book: "book",
+    Article: "article",
+    Symbol: "symbol",
+    Quote: "quote",
+    TimelineEvent: "timeline_event",
+    Glossary: "glossary",
+    Term: "term",
+    Guide: "guide",
+    Collection: "collection",
+    Media: "media",
+    Reference: "reference",
+};

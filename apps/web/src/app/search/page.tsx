@@ -1,14 +1,14 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardTitle, Badge, Button } from "@archron/ui"
 import {
-  KnowledgeConceptIcon,
-  KnowledgeThinkerIcon,
-  KnowledgeBookIcon,
-  KnowledgeArticleIcon,
+  ConceptIcon,
+  ThinkerIcon,
+  BookIcon,
+  ArticleIcon,
 } from "@archron/ui"
 import { SearchFilters } from "@/components/search/search-filters"
 
@@ -182,10 +182,10 @@ const TYPE_LABELS: Record<ObjectType, string> = {
 }
 const TYPE_ORDER: ObjectType[] = ["concept", "thinker", "book", "article"]
 const TYPE_ICONS: Record<ObjectType, React.ComponentType<{ size?: "sm" | "md" | "lg" | "xl"; className?: string }>> = {
-  concept: KnowledgeConceptIcon,
-  thinker: KnowledgeThinkerIcon,
-  book: KnowledgeBookIcon,
-  article: KnowledgeArticleIcon,
+  concept: ConceptIcon,
+  thinker: ThinkerIcon,
+  book: BookIcon,
+  article: ArticleIcon,
 }
 
 function filterResults(results: SearchResultItem[], query: string, type: FilterType): SearchResultItem[] {
@@ -208,7 +208,7 @@ function filterResults(results: SearchResultItem[], query: string, type: FilterT
   return filtered
 }
 
-export default function SearchPage() {
+function SearchPageContent() {
   const searchParams = useSearchParams()
   const query = searchParams.get("q") ?? ""
   const [activeType, setActiveType] = useState<FilterType>("all")
@@ -284,7 +284,7 @@ export default function SearchPage() {
                   const Icon = TYPE_ICONS[item.type]
                   return (
                     <Link key={item.id} href={`/${item.slug}`}>
-                      <Card className="group transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated">
+                      <Card className="group transition-colors duration-[var(--motion-normal)] hover:border-[var(--color-interactive-border-hover)] hover:bg-elevated">
                         <CardContent className="flex flex-col gap-2 p-5">
                           <div className="flex items-start justify-between gap-3">
                             <div className="flex items-center gap-2 min-w-0">
@@ -349,5 +349,18 @@ export default function SearchPage() {
         </div>
       )}
     </main>
+  )
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={
+      <main className="mx-auto w-full max-w-container-page px-6 py-8">
+        <h1 className="mb-2 font-serif text-page-title font-semibold text-text">Search</h1>
+        <p className="mb-6 text-caption text-text-muted">Loading...</p>
+      </main>
+    }>
+      <SearchPageContent />
+    </Suspense>
   )
 }

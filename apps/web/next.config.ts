@@ -17,6 +17,11 @@ const config: NextConfig = {
     "@archron/renderer",
     "@archron/editor",
     "@archron/graph",
+    "@archron/database",
+    "@archron/knowledge-engine",
+    "@archron/search",
+    "@archron/shared",
+    "@archron/auth",
   ],
   images: {
     remotePatterns: [

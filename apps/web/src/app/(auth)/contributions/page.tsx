@@ -8,13 +8,13 @@ import {
   Select,
   Divider,
   Pagination,
-  KnowledgeArticleIcon,
-  KnowledgeConceptIcon,
-  KnowledgeThinkerIcon,
-  KnowledgeBookIcon,
-  KnowledgeSymbolIcon,
-  KnowledgeCollectionIcon,
-  FileIcon,
+  ArticleIcon,
+  ConceptIcon,
+  ThinkerIcon,
+  BookIcon,
+  SymbolIcon,
+  CollectionIcon,
+  DraftIcon,
   CheckIcon,
 } from "@archron/ui"
 
@@ -39,13 +39,13 @@ const ALL_TYPES = [
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const TYPE_ICONS: Record<string, React.ComponentType<any>> = {
-  Articles: KnowledgeArticleIcon,
-  Concepts: KnowledgeConceptIcon,
-  Thinkers: KnowledgeThinkerIcon,
-  Books: KnowledgeBookIcon,
-  Symbols: KnowledgeSymbolIcon,
-  Collections: KnowledgeCollectionIcon,
-  References: FileIcon,
+  Articles: ArticleIcon,
+  Concepts: ConceptIcon,
+  Thinkers: ThinkerIcon,
+  Books: BookIcon,
+  Symbols: SymbolIcon,
+  Collections: CollectionIcon,
+  References: DraftIcon,
   Reviews: CheckIcon,
 }
 

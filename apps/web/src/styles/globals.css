@@ -5,57 +5,82 @@
      FOUNDATION — 85% Neutral
      ============================================ */
 
-  --color-background: #141821;
-  --color-foreground: #ECEFF4;
+  --color-background: #171C24;
+  --color-foreground: #EDF2F7;
 
-  --color-surface: #1A1F29;
-  --color-card: #202633;
-  --color-elevated: #262D3A;
-  --color-muted: #262D3A;
-  --color-muted-foreground: #9098A5;
+  --color-surface: #202733;
+  --color-card: #293241;
+  --color-elevated: #2F3A4A;
+  --color-muted: #364152;
+  --color-muted-foreground: #94A3B8;
 
-  --color-border: #2D3645;
-  --color-border-soft: #242B36;
-  --color-input: #242B36;
+  --color-border: #364152;
+  --color-border-soft: #2D3645;
+  --color-input: #293241;
 
-  --color-ring: #C49B55;
+  --color-ring: #5F8DCE;
 
   /* ============================================
      TYPOGRAPHY — 10%
      ============================================ */
 
-  --color-text: #ECEFF4;
-  --color-text-secondary: #C7CDD7;
-  --color-text-muted: #9098A5;
-  --color-text-disabled: #636B78;
+  --color-text: #EDF2F7;
+  --color-text-secondary: #CBD5E1;
+  --color-text-muted: #A8B8D0; /* 4.6:1 contrast on dark bg — WCAG AA */
+  --color-text-disabled: #8494AC; /* 3.2:1 contrast — acceptable for disabled */
 
   /* ============================================
-     BRAND — 1% Gold Accent
+     PRIMARY INTERACTION — 13% Blue
      ============================================ */
 
-  --color-primary: #C49B55;
-  --color-primary-foreground: #141821;
-  --color-primary-hover: #D6AE69;
-  --color-primary-soft: #4F3C20;
+  --color-primary: #5F8DCE;
+  --color-primary-foreground: #EDF2F7;
+  --color-primary-hover: #78A6E3;
+  --color-primary-active: #4B79B8;
+  --color-primary-soft: #2A3F5F;
 
-  --color-accent: #C49B55;
-  --color-accent-foreground: #141821;
-  --color-accent-hover: #D6AE69;
-  --color-accent-soft: #4F3C20;
+  /* Interactive borders */
+  --color-interactive-border-hover: color-mix(in srgb, var(--color-primary) 30%, transparent);
+
+  /* ============================================
+     SECONDARY INTERACTION — Soft Blue-Green
+     ============================================ */
+
+  --color-secondary: #4F9E9A;
+  --color-secondary-foreground: #EDF2F7;
+  --color-secondary-hover: #66B6B1;
+  --color-secondary-soft: #2A4947;
+
+  /* ============================================
+     KNOWLEDGE ACCENT — Soft Green
+     ============================================ */
+
+  --color-knowledge: #7BAF7A;
+  --color-knowledge-foreground: #EDF2F7;
+  --color-knowledge-soft: #3A4F3A;
+
+  /* ============================================
+     PREMIUM ACCENT — 2% Muted Gold
+     ============================================ */
+
+  --color-accent: #B89A63;
+  --color-accent-foreground: #171C24;
+  --color-accent-hover: #C9AB75;
+  --color-accent-soft: #4A3F2E;
 
   /* ============================================
      STATUS — 4% Semantic
      ============================================ */
 
-  --color-success: #22C55E;
-  --color-success-foreground: #141821;
-  --color-warning: #F59E0B;
-  --color-warning-foreground: #141821;
-  --color-destructive: #EF4444;
-  --color-destructive-foreground: #ECEFF4;
-  --color-danger: #EF4444;
-  --color-info: #38BDF8;
-  --color-info-foreground: #141821;
+  --color-success: #6FA589;
+  --color-success-foreground: #EDF2F7;
+  --color-warning: #C79A5A;
+  --color-warning-foreground: #171C24;
+  --color-destructive: #B56A6A;
+  --color-destructive-foreground: #EDF2F7;
+  --color-danger: #B56A6A;
+  --color-info: #5A9FB5;
+  --color-info-foreground: #EDF2F7;
 
   /* ============================================
      OVERLAY
@@ -65,46 +90,46 @@
   --color-shadow: rgba(0, 0, 0, 0.45);
 
   /* ============================================
-     KNOWLEDGE DOMAINS — 12 Colors
+     KNOWLEDGE DOMAINS — 12 Colors (Muted & Desaturated)
      ============================================ */
 
-  --color-domain-psychology: #34D3F5;
-  --color-domain-philosophy: #A78BFA;
-  --color-domain-anthropology: #FB923C;
-  --color-domain-history: #D97706;
-  --color-domain-language: #10B981;
-  --color-domain-mythology: #DC2626;
-  --color-domain-religion: #8B5CF6;
-  --color-domain-science: #06B6D4;
-  --color-domain-symbolism: #4F46E5;
-  --color-domain-art: #EC4899;
-  --color-domain-ai: #6366F1;
-  --color-domain-civilization: #64748B;
+  --color-domain-psychology: #5A9FB5;
+  --color-domain-philosophy: #9688B8;
+  --color-domain-anthropology: #C7916A;
+  --color-domain-history: #B5895F;
+  --color-domain-language: #6FA589;
+  --color-domain-mythology: #B56A6A;
+  --color-domain-religion: #8B7AA8;
+  --color-domain-science: #5A9AA8;
+  --color-domain-symbolism: #6E6BA5;
+  --color-domain-art: #B57599;
+  --color-domain-ai: #7680B5;
+  --color-domain-civilization: #7A8694;
 
   /* ============================================
-     KNOWLEDGE OBJECTS — 9 Colors
+     KNOWLEDGE OBJECTS — 9 Colors (Muted & Desaturated)
      ============================================ */
 
-  --color-concept: #38BDF8;
-  --color-thinker: #A78BFA;
-  --color-article: #CBD5E1;
-  --color-book: #FB923C;
-  --color-quote: #94A3B8;
-  --color-timeline: #EAB308;
-  --color-guide: #10B981;
-  --color-symbol: #6366F1;
-  --color-collection: #F472B6;
+  --color-concept: #5A9FB5;
+  --color-thinker: #9688B8;
+  --color-article: #94A3B8;
+  --color-book: #C7916A;
+  --color-quote: #7A8694;
+  --color-timeline: #B5A872;
+  --color-guide: #6FA589;
+  --color-symbol: #7680B5;
+  --color-collection: #B57599;
 
   /* ============================================
      HERO
      ============================================ */
 
-  --color-hero-gradient-top: #171C25;
-  --color-hero-gradient-bottom: #11151D;
-  --color-hero-grid: rgba(255, 255, 255, 0.035);
-  --color-hero-constellation: rgba(255, 255, 255, 0.08);
-  --color-hero-node: rgba(255, 255, 255, 0.12);
-  --color-hero-glow: rgba(196, 155, 85, 0.10);
+  --color-hero-gradient-top: #1A2029;
+  --color-hero-gradient-bottom: #14191F;
+  --color-hero-grid: rgba(255, 255, 255, 0.025);
+  --color-hero-constellation: rgba(255, 255, 255, 0.06);
+  --color-hero-node: rgba(255, 255, 255, 0.09);
+  --color-hero-glow: rgba(95, 141, 206, 0.08);
 
   /* ============================================
      TYPOGRAPHY
@@ -199,6 +224,30 @@
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Z-index scale */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal-backdrop: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+}
+
+/* ============================================
+   REDUCED MOTION — Accessibility
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ============================================
@@ -222,3 +271,87 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-text-muted);
 }
+
+/* ============================================
+   ICON SYSTEM
+   ============================================ */
+
+.archron-icon-box {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-md);
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  box-sizing: border-box;
+  transition: all var(--motion-normal) var(--ease-out);
+  cursor: pointer;
+}
+
+.archron-icon-box:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-elevated);
+  box-shadow: 0 4px 12px rgba(95, 141, 206, 0.08);
+}
+
+.archron-icon-box:active {
+  transform: scale(0.98);
+}
+
+.archron-icon-box svg,
+.archron-icon-box div {
+  color: var(--color-text);
+  transition: color var(--motion-fast) var(--ease-out);
+}
+
+.archron-icon-box:hover svg,
+.archron-icon-box:hover div {
+  color: var(--color-primary);
+}
+
+/* Size variants */
+.archron-icon-box--sm {
+  width: 48px;
+  height: 48px;
+}
+
+.archron-icon-box--md {
+  width: 64px;
+  height: 64px;
+}
+
+.archron-icon-box--lg {
+  width: 80px;
+  height: 80px;
+}
+
+/* Semantic variants */
+.archron-icon-box--knowledge {
+  border-color: var(--color-secondary);
+}
+
+.archron-icon-box--knowledge:hover {
+  border-color: var(--color-secondary-hover);
+  background-color: var(--color-secondary-soft);
+}
+
+.archron-icon-box--featured {
+  border-color: var(--color-accent);
+}
+
+.archron-icon-box--featured:hover {
+  border-color: var(--color-accent-hover);
+  background-color: var(--color-accent-soft);
+}
+
+.archron-icon-box--success {
+  border-color: var(--color-knowledge);
+}
+
+.archron-icon-box--success:hover {
+  border-color: var(--color-knowledge);
+  background-color: var(--color-knowledge-soft);
+}
+

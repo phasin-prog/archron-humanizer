@@ -7,10 +7,9 @@ import {
   Badge,
   Progress,
   Divider,
-  EditorIcon,
-  UploadIcon,
-  KnowledgeArticleIcon,
-  KnowledgeConceptIcon,
+  PlusIcon,
+  ArticleIcon,
+  ConceptIcon,
 } from "@archron/ui"
 
 interface Activity {
@@ -54,7 +53,7 @@ export default function StudioPage() {
       <div className="mx-auto max-w-container-page px-6 pb-24">
         <section className="pt-24">
           <div className="flex items-center gap-2.5">
-            <EditorIcon className="h-5 w-5 text-primary" />
+            <PlusIcon className="h-5 w-5 text-primary" />
             <h1 className="font-display text-display font-bold tracking-tight text-text">
               Creator Studio
             </h1>
@@ -73,7 +72,7 @@ export default function StudioPage() {
               <Card className="group cursor-pointer transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated">
                 <CardContent className="flex flex-col items-center gap-3 py-8 text-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                    <KnowledgeArticleIcon size="lg" />
+                    <ArticleIcon size="lg" />
                   </div>
                   <div>
                     <p className="font-serif text-body font-semibold text-text">
@@ -91,7 +90,7 @@ export default function StudioPage() {
               <Card className="group cursor-pointer transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated">
                 <CardContent className="flex flex-col items-center gap-3 py-8 text-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                    <KnowledgeConceptIcon size="lg" />
+                    <ConceptIcon size="lg" />
                   </div>
                   <div>
                     <p className="font-serif text-body font-semibold text-text">
@@ -109,7 +108,7 @@ export default function StudioPage() {
               <Card className="group cursor-pointer transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated">
                 <CardContent className="flex flex-col items-center gap-3 py-8 text-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                    <UploadIcon size="lg" />
+                    <PlusIcon size="lg" />
                   </div>
                   <div>
                     <p className="font-serif text-body font-semibold text-text">

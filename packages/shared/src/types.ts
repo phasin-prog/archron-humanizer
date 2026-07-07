@@ -89,7 +89,28 @@ export interface RelationResult extends Relationship {
 }
 
 // User & Auth Types
-export type UserRole = "guest" | "user" | "contributor" | "editor" | "admin"
+export type UserRole = "guest" | "member" | "writer" | "reviewer" | "editor" | "administrator"
+
+// Legacy alias for compatibility
+export type Role = UserRole
+
+export const Roles = {
+  Guest: "guest" as const,
+  Member: "member" as const,
+  Writer: "writer" as const,
+  Reviewer: "reviewer" as const,
+  Editor: "editor" as const,
+  Administrator: "administrator" as const,
+}
+
+export const RoleHierarchy: Record<UserRole, number> = {
+  guest: 0,
+  member: 1,
+  writer: 2,
+  reviewer: 3,
+  editor: 4,
+  administrator: 5,
+}
 
 export interface UserProfile {
   id: string

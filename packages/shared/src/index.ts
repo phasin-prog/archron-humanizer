@@ -18,6 +18,7 @@ export type {
   RelationQuery,
   RelationResult,
   UserRole,
+  Role,
   UserProfile,
   SearchFacet,
   SearchQuery,
@@ -25,6 +26,9 @@ export type {
   SearchResponse,
   AutocompleteResult,
 } from "./types"
+
+// Re-export constants
+export { Roles, RoleHierarchy } from "./types"
 
 // Re-export integration utilities
 export type {

@@ -1,8 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect, type FormEvent } from "react"
-import { Card, Input } from "@archron/ui"
-import { ChatIcon } from "@archron/ui"
+import { Card, Input, ShareIcon } from "@archron/ui"
 
 interface Message {
   id: number
@@ -86,7 +85,7 @@ export default function CompanionPage() {
   return (
     <div className="mx-auto flex h-[calc(100vh-4rem)] max-w-container-page flex-col px-6">
       <div className="flex items-center gap-2.5 py-6">
-        <ChatIcon className="h-5 w-5 text-primary" />
+        <ShareIcon className="h-5 w-5 text-primary" />
         <h1 className="font-serif text-section font-semibold text-text">Companion</h1>
       </div>
 
@@ -128,9 +127,9 @@ export default function CompanionPage() {
             {loading && (
               <div className="flex justify-start">
                 <div className="flex gap-1.5 rounded-2xl bg-card px-5 py-3.5">
-                  <span className="h-2 w-2 animate-bounce rounded-full bg-primary/60 [animation-delay:0ms]" />
-                  <span className="h-2 w-2 animate-bounce rounded-full bg-primary/60 [animation-delay:150ms]" />
-                  <span className="h-2 w-2 animate-bounce rounded-full bg-primary/60 [animation-delay:300ms]" />
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-primary/60 [animation-delay:0ms]" />
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-primary/60 [animation-delay:150ms]" />
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-primary/60 [animation-delay:300ms]" />
                 </div>
               </div>
             )}

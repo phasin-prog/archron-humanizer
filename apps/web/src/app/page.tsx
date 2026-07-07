@@ -1,44 +1,37 @@
 import Link from "next/link"
 import { SearchBar } from "@/components/search/search-bar"
+import { Logo } from "@/components/brand/logo"
+import { SiteNavigation } from "@/components/navigation/site-navigation"
+import { ExploreIcon, TimelineIcon, ConstellationIcon } from "@archron/ui"
 
 export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col">
       {/* ============================================
-          HERO
+          HERO — Logo + Navigation + Search
           ============================================ */}
-      <section className="relative flex flex-col items-center justify-center px-6 pb-24 pt-32 text-center">
+      <section className="relative flex flex-col items-center justify-center px-6 pb-16 pt-20">
+        {/* Subtle ambient glow */}
         <div
           className="pointer-events-none absolute inset-0 select-none"
           style={{
-            background: "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(196,155,85,0.06) 0%, transparent 60%)",
+            background: "radial-gradient(ellipse 70% 50% at 50% 30%, rgba(95,141,206,0.03) 0%, transparent 60%)",
           }}
         />
 
-        {/* Constellation */}
-        <div className="pointer-events-none absolute inset-0 select-none opacity-[0.04]">
-          <div className="absolute left-[20%] top-[30%] h-px w-8 rotate-[25deg] bg-primary" />
-          <div className="absolute right-[25%] top-[25%] h-px w-12 -rotate-[20deg] bg-primary" />
-          <div className="absolute left-[40%] top-[55%] h-px w-6 rotate-[45deg] bg-primary" />
-        </div>
+        <div className="relative z-[var(--z-base)] flex w-full max-w-reading flex-col items-center gap-8">
+          {/* Logo */}
+          <Logo size="lg" />
 
-        <div className="relative z-10 flex flex-col items-center gap-4">
-          <h1 className="font-display text-display font-bold tracking-tight text-text">
-            ARCHRON
-          </h1>
-          <p className="font-serif text-page-title font-light text-text-muted">
-            Understanding Humanity
-          </p>
-          <p className="font-serif text-page-title font-light text-text-muted -mt-2">
-            Through Knowledge
-          </p>
+          {/* Site Navigation */}
+          <SiteNavigation className="mt-4" />
+
+          {/* Search */}
+          <div className="mt-6 w-full">
+            <SearchBar />
+          </div>
         </div>
       </section>
-
-      {/* Search */}
-      <div className="mx-auto -mt-8 w-full max-w-reading px-6">
-        <SearchBar />
-      </div>
 
       {/* ============================================
           CONTINUE READING
@@ -47,15 +40,15 @@ export default function HomePage() {
         <h2 className="mb-6 font-serif text-section font-semibold text-text">
           Continue Reading
         </h2>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3].map((i) => (
             <Link
               key={i}
               href={i === 1 ? "/concepts/structure-of-the-unconscious" : i === 2 ? "/concepts/archetypes" : "/concepts/the-shadow"}
-              className="group rounded-xl border border-border bg-card p-5 transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated"
+              className="group rounded-xl border border-border bg-card p-5 transition-colors duration-[var(--motion-normal)] hover:border-[var(--color-interactive-border-hover)] hover:bg-elevated"
             >
               <div className="mb-2 flex items-center gap-2">
-                <span className="rounded-full bg-domain-philosophy/15 px-2 py-0.5 font-mono text-meta font-medium text-domain-philosophy">
+                <span className="rounded-full bg-[color-mix(in_srgb,var(--color-concept)_15%,transparent)] px-2 py-0.5 font-mono text-meta font-medium text-[var(--color-concept)]">
                   Concept
                 </span>
                 <span className="text-caption text-text-disabled">60% complete</span>
@@ -82,15 +75,21 @@ export default function HomePage() {
         <h2 className="mb-6 font-serif text-section font-semibold text-text">
           Featured Guide
         </h2>
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2">
           {[1, 2].map((i) => (
             <Link
               key={i}
               href={i === 1 ? "/guides" : "/guides"}
-              className="group rounded-xl border border-border bg-card p-6 transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated"
+              className="group relative rounded-xl border border-accent/30 bg-card p-6 transition-colors duration-[var(--motion-normal)] hover:border-accent/50 hover:bg-elevated"
             >
+              {/* Featured badge */}
+              {i === 1 && (
+                <div className="absolute -right-2 -top-2 rounded-full bg-accent px-3 py-1 font-mono text-meta font-medium text-accent-foreground">
+                  Featured
+                </div>
+              )}
               <div className="mb-3 flex items-center gap-2">
-                <span className="rounded-full bg-primary/15 px-2 py-0.5 font-mono text-meta font-medium text-primary">
+                <span className="rounded-full bg-[color-mix(in_srgb,var(--color-guide)_15%,transparent)] px-2 py-0.5 font-mono text-meta font-medium text-[var(--color-guide)]">
                   Guide
                 </span>
                 <span className="text-caption text-text-disabled">8 Lessons</span>
@@ -117,10 +116,10 @@ export default function HomePage() {
         </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { type: "Concept", title: "Individuation", domain: "Psychology", color: "#34D3F5" },
-            { type: "Thinker", title: "Carl Jung", domain: "Psychology", color: "#A78BFA" },
-            { type: "Article", title: "The Role of Dreams", domain: "Psychology", color: "#CBD5E1" },
-            { type: "Book", title: "Man and His Symbols", domain: "Psychology", color: "#FB923C" },
+            { type: "Concept", title: "Individuation", domain: "Psychology", color: "var(--color-concept)" },
+            { type: "Thinker", title: "Carl Jung", domain: "Psychology", color: "var(--color-thinker)" },
+            { type: "Article", title: "The Role of Dreams", domain: "Psychology", color: "var(--color-article)" },
+            { type: "Book", title: "Man and His Symbols", domain: "Psychology", color: "var(--color-book)" },
           ].map((item) => (
             <Link
               key={item.title}
@@ -131,7 +130,7 @@ export default function HomePage() {
                 <span
                   className="rounded-full px-2 py-0.5 font-mono text-meta font-medium"
                   style={{
-                    backgroundColor: `${item.color}15`,
+                    backgroundColor: `color-mix(in srgb, ${item.color} 15%, transparent)`,
                     color: item.color,
                   }}
                 >
@@ -157,39 +156,51 @@ export default function HomePage() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <Link
             href="/explore"
-            className="group rounded-xl border border-border bg-card p-6 transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated"
+            className="group flex items-start gap-4 rounded-xl border border-border bg-card p-6 transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated"
           >
-            <span className="text-2xl">🗺</span>
-            <h3 className="mt-3 font-serif text-card-title font-semibold text-text group-hover:text-primary transition-colors">
-              Explore
-            </h3>
-            <p className="mt-1 font-sans text-caption text-text-muted">
-              Discover knowledge through disciplines and domains
-            </p>
+            <div className="shrink-0 rounded-lg bg-elevated p-2">
+              <ExploreIcon className="h-6 w-6 text-primary" />
+            </div>
+            <div>
+              <h3 className="font-serif text-card-title font-semibold text-text group-hover:text-primary transition-colors">
+                Explore
+              </h3>
+              <p className="mt-1 font-sans text-caption text-text-muted">
+                Discover knowledge through disciplines and domains
+              </p>
+            </div>
           </Link>
           <Link
             href="/timeline"
-            className="group rounded-xl border border-border bg-card p-6 transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated"
+            className="group flex items-start gap-4 rounded-xl border border-border bg-card p-6 transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated"
           >
-            <span className="text-2xl">⏳</span>
-            <h3 className="mt-3 font-serif text-card-title font-semibold text-text group-hover:text-primary transition-colors">
-              Timeline
-            </h3>
-            <p className="mt-1 font-sans text-caption text-text-muted">
-              Walk through the history of human thought
-            </p>
+            <div className="shrink-0 rounded-lg bg-elevated p-2">
+              <TimelineIcon className="h-6 w-6 text-primary" />
+            </div>
+            <div>
+              <h3 className="font-serif text-card-title font-semibold text-text group-hover:text-primary transition-colors">
+                Timeline
+              </h3>
+              <p className="mt-1 font-sans text-caption text-text-muted">
+                Walk through the history of human thought
+              </p>
+            </div>
           </Link>
           <Link
             href="/constellation"
-            className="group rounded-xl border border-border bg-card p-6 transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated"
+            className="group flex items-start gap-4 rounded-xl border border-border bg-card p-6 transition-colors duration-[var(--motion-normal)] hover:border-primary/30 hover:bg-elevated"
           >
-            <span className="text-2xl">✦</span>
-            <h3 className="mt-3 font-serif text-card-title font-semibold text-text group-hover:text-primary transition-colors">
-              Constellation
-            </h3>
-            <p className="mt-1 font-sans text-caption text-text-muted">
-              Visualize the connections between ideas
-            </p>
+            <div className="shrink-0 rounded-lg bg-elevated p-2">
+              <ConstellationIcon className="h-6 w-6 text-primary" />
+            </div>
+            <div>
+              <h3 className="font-serif text-card-title font-semibold text-text group-hover:text-primary transition-colors">
+                Constellation
+              </h3>
+              <p className="mt-1 font-sans text-caption text-text-muted">
+                Visualize the connections between ideas
+              </p>
+            </div>
           </Link>
         </div>
       </section>

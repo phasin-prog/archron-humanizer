@@ -13,7 +13,11 @@
       "dependsOn": ["^build"]
     },
     "lint": {},
-    "test": {},
+    "test": {
+      "dependsOn": ["^build"],
+      "inputs": ["src/**/*", "vitest.config.ts", "package.json", "tsconfig.json"],
+      "outputs": ["coverage/**"]
+    },
     "clean": {
       "cache": false
     }

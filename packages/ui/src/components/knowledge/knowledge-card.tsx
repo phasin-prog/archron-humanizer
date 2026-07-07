@@ -3,21 +3,27 @@ import { cn } from "../../lib/utils"
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "../ui/card"
 import { Badge } from "../ui/badge"
 import {
-  BookOpen,
-  FileText,
-  Lightbulb,
-  User,
-  School,
-  type LucideIcon,
-} from "lucide-react"
+  ConceptIcon,
+  ThinkerIcon,
+  BookIcon,
+  ArticleIcon,
+  GuideIcon,
+  QuoteIcon,
+  TimelineIcon,
+  SymbolIcon,
+  CollectionIcon,
+} from "../icons"
 
-const typeConfig: Record<string, { icon: LucideIcon; label: string }> = {
-  concept: { icon: Lightbulb, label: "Concept" },
-  thinker: { icon: User, label: "Thinker" },
-  book: { icon: BookOpen, label: "Book" },
-  article: { icon: FileText, label: "Article" },
-  school: { icon: School, label: "School" },
-  theory: { icon: Lightbulb, label: "Theory" },
+const typeConfig: Record<string, { icon: React.ComponentType<{ className?: string }>; label: string }> = {
+  concept: { icon: ConceptIcon, label: "Concept" },
+  thinker: { icon: ThinkerIcon, label: "Thinker" },
+  book: { icon: BookIcon, label: "Book" },
+  article: { icon: ArticleIcon, label: "Article" },
+  guide: { icon: GuideIcon, label: "Guide" },
+  quote: { icon: QuoteIcon, label: "Quote" },
+  timeline: { icon: TimelineIcon, label: "Timeline" },
+  symbol: { icon: SymbolIcon, label: "Symbol" },
+  collection: { icon: CollectionIcon, label: "Collection" },
 }
 
 export interface KnowledgeCardProps {
@@ -41,7 +47,7 @@ export function KnowledgeCard({
   className,
   onClick,
 }: KnowledgeCardProps): React.ReactElement {
-  const config = typeConfig[objectType] ?? { icon: FileText, label: objectType }
+  const config = typeConfig[objectType] ?? { icon: ArticleIcon, label: objectType }
   const Icon = config.icon
 
   return (
@@ -55,7 +61,7 @@ export function KnowledgeCard({
       <CardHeader>
         <div className="flex items-center gap-2">
           <Badge variant="secondary" className="text-xs flex items-center gap-1">
-            <Icon className="size-3" />
+            <Icon className="h-3 w-3" />
             {config.label}
           </Badge>
         </div>
