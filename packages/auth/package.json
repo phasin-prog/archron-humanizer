@@ -5,6 +5,10 @@
     ".": {
       "types": "./src/index.ts",
       "import": "./src/index.ts"
+    },
+    "./client": {
+      "types": "./src/client.tsx",
+      "import": "./src/client.tsx"
     }
   },
   "dependencies": {

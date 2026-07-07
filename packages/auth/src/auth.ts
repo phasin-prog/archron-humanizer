@@ -19,22 +19,20 @@ export async function getAuth() {
   }
 }
 
-export function requireRole(minimumRole: Role) {
-  return async () => {
-    const { role, userId } = await getAuth()
-    const minLevel = RoleHierarchy[minimumRole]
-    const userLevel = RoleHierarchy[role]
+export async function requireRole(minimumRole: Role) {
+  const { role, userId, user } = await getAuth()
+  const minLevel = RoleHierarchy[minimumRole]
+  const userLevel = RoleHierarchy[role]
 
-    if (!userId) {
-      throw new Error("Authentication required")
-    }
-
-    if (userLevel < minLevel) {
-      throw new Error(`Requires at least ${minimumRole} role`)
-    }
-
-    return { userId, role }
+  if (!userId) {
+    throw new Error("Authentication required")
   }
+
+  if (userLevel < minLevel) {
+    throw new Error(`Requires at least ${minimumRole} role`)
+  }
+
+  return { userId, role, user }
 }
 
 export { clerkClient } from "@clerk/nextjs/server"

@@ -1,0 +1,16 @@
+import type { NextConfig } from "next"
+
+const config: NextConfig = {
+  transpilePackages: [
+    "@archron/ui",
+    "@archron/auth",
+    "@archron/database",
+    "@archron/search",
+    "@archron/renderer",
+    "@archron/editor",
+    "@archron/knowledge-engine",
+    "@archron/shared",
+  ],
+}
+
+export default config
