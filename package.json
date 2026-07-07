@@ -5,7 +5,7 @@
     "dev": "turbo dev",
     "build": "turbo build",
     "lint": "turbo lint",
-    "typecheck": "turbo typecheck",
+    "typecheck": "NODE_OPTIONS=\"--max-old-space-size=4096\" turbo typecheck",
     "test": "turbo test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
