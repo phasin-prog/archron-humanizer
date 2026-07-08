@@ -11,6 +11,9 @@ const withMDX = createMDX({
 })
 
 const config: NextConfig = {
+  turbopack: {
+    root: "../..",
+  },
   pageExtensions: ["ts", "tsx", "md", "mdx"],
   transpilePackages: [
     "@archron/ui",
