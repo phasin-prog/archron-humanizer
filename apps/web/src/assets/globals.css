@@ -221,26 +221,6 @@
   --motion-normal: 220ms;
   --motion-slow: 420ms;
   --motion-ambient: 14000ms;
-}
-
-/* ============================================
-   REDUCED MOTION
-   ============================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-  --motion-fast: 120ms;
-  --motion-normal: 220ms;
-  --motion-slow: 420ms;
-  --motion-ambient: 14000ms;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
@@ -256,7 +236,7 @@
 }
 
 /* ============================================
-   REDUCED MOTION — Accessibility
+   REDUCED MOTION
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {

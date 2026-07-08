@@ -17,6 +17,9 @@ import {
 import type { DomainInfo } from "@/components/explore/domain-grid"
 import { db, listObjects } from "@archron/database"
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 // Static domain metadata
 const DOMAIN_METADATA: DomainInfo[] = [
   { slug: "psychology", name: "Psychology", color: "var(--color-domain-psychology)", conceptCount: 0, thinkerCount: 0, description: "The scientific study of the mind and behavior" },

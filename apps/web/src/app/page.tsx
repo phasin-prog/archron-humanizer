@@ -48,7 +48,13 @@ export default function HomePage() {
               className="group rounded-xl border border-border bg-card p-5 transition-colors duration-[var(--motion-normal)] hover:border-[var(--color-interactive-border-hover)] hover:bg-elevated"
             >
               <div className="mb-2 flex items-center gap-2">
-                <span className="rounded-full bg-[color-mix(in_srgb,var(--color-concept)_15%,transparent)] px-2 py-0.5 font-mono text-meta font-medium text-[var(--color-concept)]">
+                <span
+                  className="rounded-full px-2 py-0.5 font-mono text-meta font-medium"
+                  style={{
+                    backgroundColor: 'color-mix(in srgb, var(--color-concept) 15%, transparent)',
+                    color: 'var(--color-concept)'
+                  }}
+                >
                   Concept
                 </span>
                 <span className="text-caption text-text-disabled">60% complete</span>
@@ -89,7 +95,13 @@ export default function HomePage() {
                 </div>
               )}
               <div className="mb-3 flex items-center gap-2">
-                <span className="rounded-full bg-[color-mix(in_srgb,var(--color-guide)_15%,transparent)] px-2 py-0.5 font-mono text-meta font-medium text-[var(--color-guide)]">
+                <span
+                  className="rounded-full px-2 py-0.5 font-mono text-meta font-medium"
+                  style={{
+                    backgroundColor: 'color-mix(in srgb, var(--color-guide) 15%, transparent)',
+                    color: 'var(--color-guide)'
+                  }}
+                >
                   Guide
                 </span>
                 <span className="text-caption text-text-disabled">8 Lessons</span>

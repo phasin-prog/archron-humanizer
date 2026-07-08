@@ -5,6 +5,9 @@ import { ReadingSidebar } from "@/components/reading/reading-sidebar"
 import { db } from "@archron/database"
 import { findObjectBySlug, findRelations } from "@archron/database"
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 export default async function ObjectPage({
   params,
 }: {
