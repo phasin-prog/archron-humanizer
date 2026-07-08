@@ -1,5 +1,18 @@
 import { NextResponse } from "next/server";
+import { getAuth, rateLimit, rateLimitHeaders } from "@archron/auth";
 export async function POST(request) {
+    const { userId } = await getAuth();
+    if (!userId) {
+        return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    }
+    const rl = rateLimit({
+        key: `chat:${userId}`,
+        limit: 20,
+        windowMs: 60000,
+    });
+    if (!rl.success) {
+        return NextResponse.json({ error: "Rate limit exceeded" }, { status: 429, headers: rateLimitHeaders(rl) });
+    }
     let message;
     try {
         const body = await request.json();

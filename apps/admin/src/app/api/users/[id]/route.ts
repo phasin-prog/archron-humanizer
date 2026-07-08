@@ -26,7 +26,7 @@ export async function PUT(
 ) {
   const { userId, role: userRole } = await getAuth()
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-  if (RoleHierarchy[userRole] < RoleHierarchy.editor) {
+  if (RoleHierarchy[userRole] < RoleHierarchy.administrator) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 })
   }
 
@@ -44,7 +44,7 @@ export async function DELETE(
 ) {
   const { userId, role: userRole } = await getAuth()
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-  if (RoleHierarchy[userRole] < RoleHierarchy.editor) {
+  if (RoleHierarchy[userRole] < RoleHierarchy.administrator) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 })
   }
 

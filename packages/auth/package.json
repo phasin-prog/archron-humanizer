@@ -9,6 +9,10 @@
     "./client": {
       "types": "./src/client.tsx",
       "import": "./src/client.tsx"
+    },
+    "./middleware": {
+      "types": "./src/middleware.ts",
+      "import": "./src/middleware.ts"
     }
   },
   "dependencies": {

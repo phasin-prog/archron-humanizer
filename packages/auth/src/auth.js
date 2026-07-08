@@ -21,7 +21,7 @@ export async function requireRole(minimumRole) {
         throw new Error("Authentication required");
     }
     if (userLevel < minLevel) {
-        throw new Error(`Requires at least ${minimumRole} role`);
+        throw new Error("Insufficient permissions");
     }
     return { userId, role, user };
 }

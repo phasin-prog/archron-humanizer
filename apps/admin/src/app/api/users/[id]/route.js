@@ -20,11 +20,11 @@ export async function PUT(request, { params }) {
     const { userId, role: userRole } = await getAuth();
     if (!userId)
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    if (RoleHierarchy[userRole] < RoleHierarchy.editor) {
+    if (RoleHierarchy[userRole] < RoleHierarchy.administrator) {
         return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
     const { id } = await params;
-    const body = (await request.json());
+    const body = await request.json();
     if (!body.role)
         return NextResponse.json({ error: "role is required" }, { status: 400 });
     await updateRole(db, id, body.role);
@@ -34,7 +34,7 @@ export async function DELETE(_request, { params }) {
     const { userId, role: userRole } = await getAuth();
     if (!userId)
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    if (RoleHierarchy[userRole] < RoleHierarchy.editor) {
+    if (RoleHierarchy[userRole] < RoleHierarchy.administrator) {
         return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
     const { id } = await params;

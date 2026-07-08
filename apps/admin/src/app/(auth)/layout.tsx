@@ -12,7 +12,7 @@ const NAV_ITEMS = [
 ]
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const auth = await requireRole("editor")
+  const auth = await requireRole("administrator")
 
   return (
     <div className="flex h-screen overflow-hidden">
