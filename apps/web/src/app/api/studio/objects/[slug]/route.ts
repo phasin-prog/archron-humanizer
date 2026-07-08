@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { auth } from "@clerk/nextjs/server"
+import { getAuth } from "@archron/auth"
 import { db } from "@archron/database"
 import { findObjectBySlug, updateObject } from "@archron/database"
 import type { CreateObjectData } from "@archron/database"
@@ -31,7 +31,7 @@ export async function GET(
   _request: Request,
   { params }: { params: Promise<{ slug: string }> },
 ) {
-  const { userId } = await auth()
+  const { userId } = await getAuth()
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
   const { slug } = await params
@@ -49,7 +49,7 @@ export async function PUT(
   request: Request,
   { params }: { params: Promise<{ slug: string }> },
 ) {
-  const { userId } = await auth()
+  const { userId } = await getAuth()
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
   const { slug } = await params

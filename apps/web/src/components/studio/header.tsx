@@ -1,6 +1,6 @@
 import { Input } from "@archron/ui"
 import { MobileNav } from "./mobile-nav"
-import type { User } from "@clerk/nextjs/server"
+import type { User } from "@archron/auth"
 
 interface HeaderProps { user?: User | null }
 

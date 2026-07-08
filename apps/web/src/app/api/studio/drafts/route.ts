@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server"
-import { auth } from "@clerk/nextjs/server"
+import { getAuth } from "@archron/auth"
 import { db } from "@archron/database"
 import { listObjects, createObject } from "@archron/database"
 import type { CreateObjectData } from "@archron/database"
 import type { ObjectQuery } from "@archron/shared"
 
 export async function GET(request: Request) {
-  const { userId } = await auth()
+  const { userId } = await getAuth()
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
   const { searchParams } = new URL(request.url)
@@ -21,7 +21,7 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const { userId } = await auth()
+  const { userId } = await getAuth()
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
   const body = (await request.json()) as CreateObjectData

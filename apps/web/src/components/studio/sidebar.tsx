@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@archron/ui"
-import { UserButton } from "@clerk/nextjs"
+import { UserButton } from "@archron/auth/client"
 
 const NAV_ITEMS = [
   { href: "/studio/dashboard", label: "Dashboard", icon: "⌂", ariaLabel: "Dashboard" },

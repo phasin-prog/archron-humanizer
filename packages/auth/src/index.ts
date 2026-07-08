@@ -1,4 +1,5 @@
 export { getAuth, requireRole, clerkClient } from "./auth"
+export type { User } from "@clerk/nextjs/server"
 export { ArchronClerkProvider, useRole, useAuth, useUser, useSession } from "./client"
 export { default as authMiddleware, createAuthMiddleware } from "./middleware"
 export type { AuthMiddlewareOptions } from "./middleware"

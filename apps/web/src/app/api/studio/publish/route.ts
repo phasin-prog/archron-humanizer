@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server"
-import { auth } from "@clerk/nextjs/server"
+import { getAuth } from "@archron/auth"
 import { db } from "@archron/database"
 import { findObjectById, updateObject } from "@archron/database"
 
 export async function POST(request: Request) {
-  const { userId } = await auth()
+  const { userId } = await getAuth()
   if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
   let body: { id?: string }
