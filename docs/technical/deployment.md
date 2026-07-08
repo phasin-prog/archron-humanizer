@@ -62,51 +62,72 @@ Redis (future)
 
 ## Monorepo Configuration
 
-Archron is a monorepo with 3 Next.js apps: `@archron/web`, `@archron/admin`, `@archron/studio`. Each requires separate Vercel project configuration.
+Archron is a monorepo with 3 Next.js apps: `@archron/web`, `@archron/admin`, `@archron/studio`. Each deployed as separate Vercel project.
 
-### Web App Configuration
+### Vercel Projects Setup
 
-**File**: `apps/web/vercel.json`
+Create 3 separate Vercel projects:
 
+1. **archron-web** (Production)
+   - Root Directory: `apps/web`
+   - Uses `apps/web/vercel.json`
+   - Domain: `archron.com`
+
+2. **archron-admin** (Admin Panel)
+   - Root Directory: `apps/admin`
+   - Uses `apps/admin/vercel.json`
+   - Domain: `admin.archron.com` or subdomain
+
+3. **archron-studio** (Studio)
+   - Root Directory: `apps/studio`
+   - Uses `apps/studio/vercel.json`
+   - Domain: `studio.archron.com` or subdomain
+
+### Configuration Files
+
+Each app has `vercel.json`:
+
+**`apps/web/vercel.json`**:
 ```json
 {
-  "buildCommand": "cd ../.. && pnpm turbo build --filter=@archron/web",
+  "buildCommand": "cd ../.. && pnpm install && pnpm turbo build --filter=@archron/web",
   "outputDirectory": ".next",
   "framework": "nextjs",
-  "installCommand": "cd ../.. && pnpm install"
+  "installCommand": "cd ../.. && pnpm install",
+  "ignoreCommand": "exit 0"
 }
 ```
 
-**Vercel Project Settings**:
-- Root Directory: `apps/web`
-- Build Command: (uses vercel.json)
-- Output Directory: (uses vercel.json)
-- Install Command: (uses vercel.json)
+**`apps/admin/vercel.json`**:
+```json
+{
+  "buildCommand": "cd ../.. && pnpm install && pnpm turbo build --filter=@archron/admin",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "installCommand": "cd ../.. && pnpm install",
+  "ignoreCommand": "exit 0"
+}
+```
 
-**Why this configuration**:
-- Root Directory points to app subdirectory so Vercel finds Next.js in package.json
-- Build/install commands use `cd ../..` to run from monorepo root
-- Turbo filter targets only the web app, skipping admin/studio builds
-- Output is relative to Root Directory (`apps/web/.next`)
+**`apps/studio/vercel.json`**:
+```json
+{
+  "buildCommand": "cd ../.. && pnpm install && pnpm turbo build --filter=@archron/studio",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "installCommand": "cd ../.. && pnpm install",
+  "ignoreCommand": "exit 0"
+}
+```
 
-### Deploying Other Apps
+**Why this works**:
+- Root Directory points to app subdirectory (Vercel finds Next.js in package.json)
+- Build commands use `cd ../..` to run from monorepo root
+- Turbo `--filter` builds only target app + dependencies
+- `ignoreCommand: "exit 0"` forces deploy on every push
+- Output directory relative to Root Directory
 
-To deploy `@archron/admin` or `@archron/studio`:
-
-1. Create separate Vercel projects
-2. Add app-specific `vercel.json` in `apps/admin/` or `apps/studio/`:
-   ```json
-   {
-     "buildCommand": "cd ../.. && pnpm turbo build --filter=@archron/admin",
-     "outputDirectory": ".next",
-     "framework": "nextjs",
-     "installCommand": "cd ../.. && pnpm install"
-   }
-   ```
-3. Set Root Directory to `apps/admin` or `apps/studio`
-4. Configure environment variables per app
-
-**Note**: Admin app uses `basePath: "/admin"` — consider deploying as subdomain instead.
+**Important**: Set Root Directory in each Vercel project settings to match app path.
 
 ## Environment Variables
 

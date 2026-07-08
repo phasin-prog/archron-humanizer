@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapis.vercel.sh/vercel.json",
-  "buildCommand": "cd ../.. && pnpm install && pnpm turbo build --filter=@archron/web",
+  "buildCommand": "cd ../.. && pnpm install && pnpm turbo build --filter=@archron/studio",
   "outputDirectory": ".next",
   "framework": "nextjs",
   "installCommand": "cd ../.. && pnpm install",
