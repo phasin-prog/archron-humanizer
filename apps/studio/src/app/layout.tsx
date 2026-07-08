@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { ArchronClerkProvider } from "@archron/auth/client"
-import "../../styles/globals.css"
+import "@/assets/globals.css"
 
 export const metadata: Metadata = {
   title: "ARCHRON Studio",

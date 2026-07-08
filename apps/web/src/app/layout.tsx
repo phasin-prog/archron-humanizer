@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { ArchronClerkProvider } from "@archron/auth/client"
 import { Navbar } from "@/components/layout/navbar"
 import { BottomNav } from "@/components/layout/bottom-nav"
-import "@/styles/globals.css"
+import "@/assets/globals.css"
 
 export const metadata: Metadata = {
   title: "ARCHRON — Understanding Humanity Through Knowledge",
