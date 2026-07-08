@@ -64,37 +64,47 @@ Redis (future)
 
 Archron is a monorepo with 3 Next.js apps: `@archron/web`, `@archron/admin`, `@archron/studio`. Each requires separate Vercel project configuration.
 
-### Root `vercel.json` (Web App)
+### Web App Configuration
+
+**File**: `apps/web/vercel.json`
 
 ```json
 {
-  "buildCommand": "turbo build --filter=@archron/web",
-  "outputDirectory": "apps/web/.next",
+  "buildCommand": "cd ../.. && pnpm turbo build --filter=@archron/web",
+  "outputDirectory": ".next",
   "framework": "nextjs",
-  "installCommand": "pnpm install"
+  "installCommand": "cd ../.. && pnpm install"
 }
 ```
 
-**Why this is needed**:
-- Vercel expects `public/` output by default; Next.js outputs to `.next/`
+**Vercel Project Settings**:
+- Root Directory: `apps/web`
+- Build Command: (uses vercel.json)
+- Output Directory: (uses vercel.json)
+- Install Command: (uses vercel.json)
+
+**Why this configuration**:
+- Root Directory points to app subdirectory so Vercel finds Next.js in package.json
+- Build/install commands use `cd ../..` to run from monorepo root
 - Turbo filter targets only the web app, skipping admin/studio builds
-- Explicit `installCommand` uses pnpm (required by workspace)
+- Output is relative to Root Directory (`apps/web/.next`)
 
 ### Deploying Other Apps
 
 To deploy `@archron/admin` or `@archron/studio`:
 
 1. Create separate Vercel projects
-2. Add app-specific `vercel.json`:
+2. Add app-specific `vercel.json` in `apps/admin/` or `apps/studio/`:
    ```json
    {
-     "buildCommand": "turbo build --filter=@archron/admin",
-     "outputDirectory": "apps/admin/.next",
+     "buildCommand": "cd ../.. && pnpm turbo build --filter=@archron/admin",
+     "outputDirectory": ".next",
      "framework": "nextjs",
-     "installCommand": "pnpm install"
+     "installCommand": "cd ../.. && pnpm install"
    }
    ```
-3. Configure environment variables per app
+3. Set Root Directory to `apps/admin` or `apps/studio`
+4. Configure environment variables per app
 
 **Note**: Admin app uses `basePath: "/admin"` — consider deploying as subdomain instead.
 
