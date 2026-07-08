@@ -12,11 +12,11 @@
     "clean": "turbo clean"
   },
   "devDependencies": {
-    "turbo": "^2",
-    "typescript": "^6.0",
-    "prettier": "^3",
     "@types/node": "^24",
-    "eslint": "^10"
+    "eslint": "^10",
+    "prettier": "^3",
+    "turbo": "^2.10.4",
+    "typescript": "^6.0"
   },
   "packageManager": "pnpm@11.10.0",
   "engines": {
