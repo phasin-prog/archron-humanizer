@@ -224,25 +224,25 @@ export default function HomePage() {
         <div className="mx-auto flex max-w-container-page flex-wrap items-center justify-center gap-6 px-6 py-10">
           <Link
             href="/support"
-            className="text-caption text-text-muted transition-colors duration-[var(--motion-fast)] hover:text-primary"
+            className="text-caption text-text-muted transition-colors duration-[var(--motion-fast)] hover:text-primary hover:underline underline-offset-4"
           >
             Support <span aria-hidden="true">☕</span>
           </Link>
           <Link
             href="/about"
-            className="text-caption text-text-muted transition-colors duration-[var(--motion-fast)] hover:text-primary"
+            className="text-caption text-text-muted transition-colors duration-[var(--motion-fast)] hover:text-primary hover:underline underline-offset-4"
           >
             About
           </Link>
           <Link
             href="/privacy"
-            className="text-caption text-text-muted transition-colors duration-[var(--motion-fast)] hover:text-primary"
+            className="text-caption text-text-muted transition-colors duration-[var(--motion-fast)] hover:text-primary hover:underline underline-offset-4"
           >
             Privacy
           </Link>
           <Link
             href="/terms"
-            className="text-caption text-text-muted transition-colors duration-[var(--motion-fast)] hover:text-primary"
+            className="text-caption text-text-muted transition-colors duration-[var(--motion-fast)] hover:text-primary hover:underline underline-offset-4"
           >
             Terms
           </Link>

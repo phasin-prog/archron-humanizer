@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="th" suppressHydrationWarning className="dark">
+    <html lang="en" suppressHydrationWarning className="dark">
       <body className="min-h-screen bg-background text-text font-sans antialiased">
         <ArchronClerkProvider>
           <Navbar />

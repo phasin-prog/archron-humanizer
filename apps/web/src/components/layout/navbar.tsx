@@ -39,7 +39,8 @@ export function Navbar() {
 
         {/* Desktop Search */}
         <div className="hidden flex-1 md:flex md:max-w-[320px]">
-          <div className="relative w-full">
+          <label className="relative w-full">
+            <span className="sr-only">Search everything</span>
             <SearchIcon
               size="sm"
               className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-text-disabled"
@@ -47,9 +48,10 @@ export function Navbar() {
             <input
               type="search"
               placeholder="Search Everything..."
+              aria-label="Search everything"
               className="w-full rounded-lg border border-input bg-card py-1.5 pl-9 pr-3 text-caption text-text placeholder:text-text-disabled focus:border-primary/30 focus:outline-none focus:ring-1 focus:ring-primary/20 transition-colors duration-[var(--motion-fast)]"
             />
-          </div>
+          </label>
         </div>
 
         {/* Nav Links — Desktop */}
@@ -69,7 +71,7 @@ export function Navbar() {
         <div className="ml-auto flex items-center gap-2">
           <SignedOut>
             <SignInButton mode="modal">
-              <button className="rounded-lg px-3 py-1.5 text-caption font-medium text-text-muted transition-colors duration-[var(--motion-fast)] hover:bg-elevated hover:text-text">
+              <button className="rounded-lg px-4 py-2 text-caption font-medium text-text-muted transition-colors duration-[var(--motion-fast)] hover:bg-elevated hover:text-text">
                 Sign In
               </button>
             </SignInButton>
@@ -94,7 +96,7 @@ function NavLink({ href, label, active }: { href: string; label: string; active?
     <Link
       href={href}
       className={cn(
-        "rounded-lg px-3 py-1.5 text-caption font-medium transition-colors duration-[var(--motion-fast)]",
+        "rounded-lg px-4 py-2 text-caption font-medium transition-colors duration-[var(--motion-fast)]",
         active
           ? "bg-primary/10 text-primary"
           : "text-text-muted hover:bg-elevated hover:text-text",
