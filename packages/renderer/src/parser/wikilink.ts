@@ -8,7 +8,9 @@ export function extractWikiLinks(markdown: string): string[] {
 
   WIKI_LINK_REGEX.lastIndex = 0
   while ((match = WIKI_LINK_REGEX.exec(markdown)) !== null) {
-    links.push(match[1].trim())
+    if (match[1]) {
+      links.push(match[1].trim())
+    }
   }
 
   return [...new Set(links)]
@@ -19,7 +21,7 @@ export function replaceWikiLinks(
   resolvedLinks: Map<string, ResolvedLink>
 ): string {
   WIKI_LINK_REGEX.lastIndex = 0
-  return markdown.replace(WIKI_LINK_REGEX, (fullMatch, target: string, alias?: string) => {
+  return markdown.replace(WIKI_LINK_REGEX, (_match, target: string, alias?: string) => {
     const cleanTarget = target.trim()
     const resolved = resolvedLinks.get(cleanTarget)
 
@@ -43,8 +45,13 @@ export async function resolveWikiLinks(
 
   for (let i = 0; i < targets.length; i++) {
     const result = results[i]
-    if (result.status === "fulfilled" && result.value) {
-      resolved.set(targets[i], result.value)
+    const target = targets[i]
+
+    if (result && result.status === "fulfilled" && target) {
+      const link = result.value
+      if (link) {
+        resolved.set(target, link)
+      }
     }
   }
 

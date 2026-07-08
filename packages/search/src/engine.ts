@@ -1,4 +1,4 @@
-import { sql, eq, and, or, inArray, desc, asc, type SQL } from "drizzle-orm"
+import { sql, type SQL } from "drizzle-orm"
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js"
 import type { SearchQuery, SearchResult, SearchResponse, SearchFacets, AutocompleteResult } from "./types"
 import { buildSearchQuery, buildSearchCountQuery, buildFacetQuery } from "./query"
@@ -15,30 +15,7 @@ export class SearchEngine {
     const startTime = Date.now()
     const { where, orderBy, limit, offset } = buildSearchQuery(q)
 
-    const selectColumns = {
-      id: sql<string>`o.id`,
-      objectType: sql<string>`o.object_type`,
-      slug: sql<string>`o.slug`,
-      title: sql<string>`o.title`,
-      description: sql<string>`o.description`,
-      language: sql<string>`o.language`,
-      difficulty: sql<string>`o.difficulty`,
-      status: sql<string>`o.status`,
-      aliases: sql<string[]>`o.aliases`,
-      domains: sql<string[]>`o.domains`,
-      tags: sql<string[]>`o.tags`,
-      thumbnail: sql<string | null>`o.thumbnail`,
-      readingTime: sql<number | null>`o.reading_time`,
-      wordCount: sql<number | null>`o.word_count`,
-      viewCount: sql<number>`o.view_count`,
-      backlinkCount: sql<number>`o.backlink_count`,
-      rank: sql<number>`0`,
-      headline: sql<string>`o.description`,
-      publishedAt: sql<string | null>`o.published_at`,
-      createdAt: sql<string>`o.created_at`,
-    }
-
-    const results: SearchResult[] = await this.db.execute(sql`
+    const results = (await this.db.execute(sql`
       SELECT
         o.id,
         o.object_type AS "objectType",
@@ -65,7 +42,7 @@ export class SearchEngine {
       ORDER BY ${sql.join(orderBy, sql`, `)}
       LIMIT ${limit}
       OFFSET ${offset}
-    `)
+    `)) as unknown as SearchResult[]
 
     const countWhere = buildSearchCountQuery(q)
     const countResult = await this.db.execute(sql`
@@ -97,7 +74,7 @@ export class SearchEngine {
 
     try {
       const facetRows = await this.db.execute(buildFacetQuery(baseConditions))
-      const rows = facetRows as { facet_type: string; value: string; count: number }[]
+      const rows = facetRows as unknown as { facet_type: string; value: string; count: number }[]
 
       const objectTypes: { value: string; count: number }[] = []
       const domains: { value: string; count: number }[] = []
@@ -126,7 +103,7 @@ export class SearchEngine {
     if (!term || term.trim().length < 2) return []
 
     const rows = await this.db.execute(buildAutocompleteQuery(term, limit))
-    return (rows as { label: string; value: string; type: string; slug?: string; description?: string }[])
+    return (rows as unknown as { label: string; value: string; type: string; slug?: string; description?: string }[])
       .map(row => ({
         value: row.value,
         label: row.label,
@@ -172,6 +149,6 @@ export class SearchEngine {
       ORDER BY o.backlink_count DESC
       LIMIT ${limit}
     `)
-    return rows as SearchResult[]
+    return rows as unknown as SearchResult[]
   }
 }

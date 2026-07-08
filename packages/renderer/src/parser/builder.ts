@@ -1,4 +1,4 @@
-import type { ASTNode, PipelineContext, PipelineResult, ComponentMap, WikiLinkNode } from "../types"
+import type { ASTNode, PipelineContext, PipelineResult, WikiLinkNode } from "../types"
 import { extractWikiLinks, resolveWikiLinks, replaceWikiLinks } from "./wikilink"
 import type { WikiLinkResolver } from "../types"
 
@@ -169,6 +169,11 @@ export function tokenize(markdown: string): Token[] {
 
   while (i < lines.length) {
     const line = lines[i]
+    if (!line) {
+      i++
+      continue
+    }
+
     const headingMatch = line.match(/^(#{1,6})\s+(.+)$/)
     const hrMatch = line.match(/^(?:---|\*\*\*|___)\s*$/)
     const codeBlockMatch = line.match(/^```(\w*)$/)
@@ -176,7 +181,7 @@ export function tokenize(markdown: string): Token[] {
     const orderedListMatch = line.match(/^(\d+)\.\s+(.+)$/)
     const unorderedListMatch = line.match(/^[-*+]\s+(.+)$/)
 
-    if (headingMatch) {
+    if (headingMatch && headingMatch[1] && headingMatch[2]) {
       tokens.push({
         type: "heading",
         raw: line,
@@ -186,25 +191,29 @@ export function tokenize(markdown: string): Token[] {
     } else if (hrMatch) {
       tokens.push({ type: "hr", raw: line })
     } else if (codeBlockMatch) {
-      const lang = codeBlockMatch[1]
+      const lang = codeBlockMatch[1] || undefined
       const codeLines: string[] = []
       i++
-      while (i < lines.length && !lines[i].startsWith("```")) {
-        codeLines.push(lines[i])
+      while (i < lines.length) {
+        const currentLine = lines[i]
+        if (!currentLine || currentLine.startsWith("```")) break
+        codeLines.push(currentLine)
         i++
       }
       tokens.push({
         type: "code",
         raw: codeLines.join("\n"),
         text: codeLines.join("\n"),
-        lang: lang || undefined,
+        lang,
       })
-    } else if (blockquoteMatch) {
+    } else if (blockquoteMatch && blockquoteMatch[1] !== undefined) {
       const quoteLines: string[] = [blockquoteMatch[1]]
       i++
       while (i < lines.length) {
-        const qMatch = lines[i].match(/^>\s?(.*)$/)
-        if (!qMatch) break
+        const currentLine = lines[i]
+        if (!currentLine) break
+        const qMatch = currentLine.match(/^>\s?(.*)$/)
+        if (!qMatch || qMatch[1] === undefined) break
         quoteLines.push(qMatch[1])
         i++
       }
@@ -218,8 +227,10 @@ export function tokenize(markdown: string): Token[] {
     } else if (orderedListMatch) {
       const items: Token[] = []
       while (i < lines.length) {
-        const olMatch = lines[i].match(/^(\d+)\.\s+(.+)$/)
-        if (!olMatch) break
+        const currentLine = lines[i]
+        if (!currentLine) break
+        const olMatch = currentLine.match(/^(\d+)\.\s+(.+)$/)
+        if (!olMatch || !olMatch[2]) break
         items.push({
           type: "list_item",
           raw: olMatch[2],
@@ -233,8 +244,10 @@ export function tokenize(markdown: string): Token[] {
     } else if (unorderedListMatch) {
       const items: Token[] = []
       while (i < lines.length) {
-        const ulMatch = lines[i].match(/^[-*+]\s+(.+)$/)
-        if (!ulMatch) break
+        const currentLine = lines[i]
+        if (!currentLine) break
+        const ulMatch = currentLine.match(/^[-*+]\s+(.+)$/)
+        if (!ulMatch || !ulMatch[1]) break
         items.push({
           type: "list_item",
           raw: ulMatch[1],
@@ -250,8 +263,12 @@ export function tokenize(markdown: string): Token[] {
     } else {
       const paragraphLines: string[] = [line]
       i++
-      while (i < lines.length && lines[i].trim().length > 0 && !lines[i].match(/^(#{1,6}\s|```|>\s?|[-*+]\s|\d+\.\s|---$)/)) {
-        paragraphLines.push(lines[i])
+      while (i < lines.length) {
+        const currentLine = lines[i]
+        if (!currentLine || currentLine.trim().length === 0 || currentLine.match(/^(#{1,6}\s|```|>\s?|[-*+]\s|\d+\.\s|---$)/)) {
+          break
+        }
+        paragraphLines.push(currentLine)
         i++
       }
       i--
@@ -338,11 +355,8 @@ export async function enrichAST(
           type: "link",
           url: `/${resolved.slug}`,
           title: wikiNode.alias || resolved.title,
-          resolvedSlug: resolved.slug,
-          resolvedTitle: resolved.title,
-          resolvedType: resolved.objectType,
           children: [{ type: "text", value: wikiNode.alias || resolved.title, position: wikiNode.position }],
-        }
+        } as ASTNode
       }
     }
 

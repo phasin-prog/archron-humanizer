@@ -15,34 +15,64 @@ import {
   ArrowRightIcon,
 } from "@archron/ui"
 import type { DomainInfo } from "@/components/explore/domain-grid"
+import { db, listObjects } from "@archron/database"
 
-const domains: DomainInfo[] = [
-  { slug: "psychology", name: "Psychology", color: "var(--color-domain-psychology)", conceptCount: 48, thinkerCount: 12, description: "The scientific study of the mind and behavior" },
-  { slug: "philosophy", name: "Philosophy", color: "var(--color-domain-philosophy)", conceptCount: 32, thinkerCount: 18, description: "Exploration of existence, knowledge, and values" },
-  { slug: "anthropology", name: "Anthropology", color: "var(--color-domain-anthropology)", conceptCount: 24, thinkerCount: 8, description: "The study of human societies, cultures, and their development" },
-  { slug: "history", name: "History", color: "var(--color-domain-history)", conceptCount: 20, thinkerCount: 6, description: "The study of past events and their interpretation" },
-  { slug: "language", name: "Language", color: "var(--color-domain-language)", conceptCount: 22, thinkerCount: 7, description: "The structure, evolution, and philosophy of language" },
-  { slug: "mythology", name: "Mythology", color: "var(--color-domain-mythology)", conceptCount: 28, thinkerCount: 0, description: "The study of myths, legends, and their symbolic meaning" },
-  { slug: "religion", name: "Religion", color: "var(--color-domain-religion)", conceptCount: 26, thinkerCount: 0, description: "Belief systems, spiritual practices, and sacred traditions" },
-  { slug: "science", name: "Science", color: "var(--color-domain-science)", conceptCount: 18, thinkerCount: 10, description: "Systematic study of the natural and physical world" },
-  { slug: "symbolism", name: "Symbolism", color: "var(--color-domain-symbolism)", conceptCount: 16, thinkerCount: 0, description: "The study of symbols, archetypes, and meaning" },
-  { slug: "art", name: "Art", color: "var(--color-domain-art)", conceptCount: 14, thinkerCount: 5, description: "Visual art, aesthetics, and creative expression" },
-  { slug: "ai", name: "AI", color: "var(--color-domain-ai)", conceptCount: 10, thinkerCount: 0, description: "Artificial intelligence and its philosophical implications" },
-  { slug: "civilization", name: "Civilization", color: "var(--color-domain-civilization)", conceptCount: 12, thinkerCount: 0, description: "The development of human societies and cultures" },
+// Static domain metadata
+const DOMAIN_METADATA: DomainInfo[] = [
+  { slug: "psychology", name: "Psychology", color: "var(--color-domain-psychology)", conceptCount: 0, thinkerCount: 0, description: "The scientific study of the mind and behavior" },
+  { slug: "philosophy", name: "Philosophy", color: "var(--color-domain-philosophy)", conceptCount: 0, thinkerCount: 0, description: "Exploration of existence, knowledge, and values" },
+  { slug: "anthropology", name: "Anthropology", color: "var(--color-domain-anthropology)", conceptCount: 0, thinkerCount: 0, description: "The study of human societies, cultures, and their development" },
+  { slug: "history", name: "History", color: "var(--color-domain-history)", conceptCount: 0, thinkerCount: 0, description: "The study of past events and their interpretation" },
+  { slug: "language", name: "Language", color: "var(--color-domain-language)", conceptCount: 0, thinkerCount: 0, description: "The structure, evolution, and philosophy of language" },
+  { slug: "mythology", name: "Mythology", color: "var(--color-domain-mythology)", conceptCount: 0, thinkerCount: 0, description: "The study of myths, legends, and their symbolic meaning" },
+  { slug: "religion", name: "Religion", color: "var(--color-domain-religion)", conceptCount: 0, thinkerCount: 0, description: "Belief systems, spiritual practices, and sacred traditions" },
+  { slug: "science", name: "Science", color: "var(--color-domain-science)", conceptCount: 0, thinkerCount: 0, description: "Systematic study of the natural and physical world" },
+  { slug: "symbolism", name: "Symbolism", color: "var(--color-domain-symbolism)", conceptCount: 0, thinkerCount: 0, description: "The study of symbols, archetypes, and meaning" },
+  { slug: "art", name: "Art", color: "var(--color-domain-art)", conceptCount: 0, thinkerCount: 0, description: "Visual art, aesthetics, and creative expression" },
+  { slug: "ai", name: "AI", color: "var(--color-domain-ai)", conceptCount: 0, thinkerCount: 0, description: "Artificial intelligence and its philosophical implications" },
+  { slug: "civilization", name: "Civilization", color: "var(--color-domain-civilization)", conceptCount: 0, thinkerCount: 0, description: "The development of human societies and cultures" },
 ]
 
-const objectTypes: { slug: string; label: string; count: number; icon: React.ComponentType<any> }[] = [
-  { slug: "concepts", label: "Concepts", count: 156, icon: ConceptIcon },
-  { slug: "thinkers", label: "Thinkers", count: 48, icon: ThinkerIcon },
-  { slug: "books", label: "Books", count: 56, icon: BookIcon },
-  { slug: "articles", label: "Articles", count: 34, icon: ArticleIcon },
-  { slug: "symbols", label: "Symbols", count: 18, icon: SymbolIcon },
-  { slug: "timeline", label: "Timeline", count: 120, icon: TimelineIcon },
-  { slug: "guides", label: "Guides", count: 12, icon: GuideIcon },
-  { slug: "collections", label: "Collections", count: 8, icon: CollectionIcon },
-]
+export default async function ExplorePage() {
+  // Query all published objects
+  const allObjects = await listObjects(db, { status: ["published"] })
 
-export default function ExplorePage() {
+  // Build domain stats via client-side aggregation
+  const domainStats: Record<string, { concepts: number; thinkers: number }> = {}
+  for (const obj of allObjects) {
+    for (const domain of obj.domains || []) {
+      if (!domainStats[domain]) {
+        domainStats[domain] = { concepts: 0, thinkers: 0 }
+      }
+      if (obj.objectType === "concept") domainStats[domain]!.concepts += 1
+      if (obj.objectType === "thinker") domainStats[domain]!.thinkers += 1
+    }
+  }
+
+  // Merge with metadata
+  const domains = DOMAIN_METADATA.map(meta => ({
+    ...meta,
+    conceptCount: domainStats[meta.slug]?.concepts || 0,
+    thinkerCount: domainStats[meta.slug]?.thinkers || 0,
+  }))
+
+  // Build type counts
+  const typeCounts: Record<string, number> = {}
+  for (const obj of allObjects) {
+    typeCounts[obj.objectType] = (typeCounts[obj.objectType] || 0) + 1
+  }
+
+  const objectTypes: { slug: string; label: string; count: number; icon: React.ComponentType<any> }[] = [
+    { slug: "concepts", label: "Concepts", count: typeCounts.concept || 0, icon: ConceptIcon },
+    { slug: "thinkers", label: "Thinkers", count: typeCounts.thinker || 0, icon: ThinkerIcon },
+    { slug: "books", label: "Books", count: typeCounts.book || 0, icon: BookIcon },
+    { slug: "articles", label: "Articles", count: typeCounts.article || 0, icon: ArticleIcon },
+    { slug: "symbols", label: "Symbols", count: typeCounts.symbol || 0, icon: SymbolIcon },
+    { slug: "timeline", label: "Timeline", count: typeCounts.timeline_event || 0, icon: TimelineIcon },
+    { slug: "guides", label: "Guides", count: typeCounts.guide || 0, icon: GuideIcon },
+    { slug: "collections", label: "Collections", count: typeCounts.collection || 0, icon: CollectionIcon },
+  ]
+
   return (
     <div className="min-h-screen">
       <div className="mx-auto max-w-container-page px-6 pb-24">

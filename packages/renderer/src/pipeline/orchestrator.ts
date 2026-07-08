@@ -3,7 +3,6 @@ import React from "react"
 import type { ASTNode, PipelineContext, PipelineResult, ComponentMap, ComponentProps, WikiLinkResolver } from "../types"
 import { parseMarkdown } from "../parser"
 import { createComponentRegistry } from "../registry"
-import { createPluginRegistry } from "../plugins"
 
 export interface PipelineOptions {
   resolver?: WikiLinkResolver

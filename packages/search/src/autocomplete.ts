@@ -1,8 +1,6 @@
 import { sql, SQL } from "drizzle-orm"
 
 export function buildAutocompleteQuery(term: string, limit: number = 8): SQL {
-  const normalized = term.trim().replace(/\s+/g, " & ")
-
   return sql`
     (
       SELECT DISTINCT ON (o.title)

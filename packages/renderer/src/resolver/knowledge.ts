@@ -18,8 +18,13 @@ export function createKnowledgeResolver(fetchFn: (target: string) => Promise<Res
       const settled = await Promise.allSettled(unique.map(t => fetchFn(t)))
       for (let i = 0; i < unique.length; i++) {
         const r = settled[i]
-        if (r.status === "fulfilled" && r.value) {
-          results.set(unique[i], r.value)
+        const target = unique[i]
+
+        if (r && r.status === "fulfilled" && target) {
+          const value = r.value
+          if (value) {
+            results.set(target, value)
+          }
         }
       }
       return results
