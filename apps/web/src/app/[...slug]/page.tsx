@@ -56,7 +56,7 @@ export default async function ObjectPage({
     relatedConcepts.length > 0 && { title: "Related Concepts", links: relatedConcepts },
     relatedThinkers.length > 0 && { title: "Thinkers", links: relatedThinkers },
     relatedBooks.length > 0 && { title: "Books", links: relatedBooks },
-  ].filter(Boolean)
+  ].filter((section): section is { title: string; links: { label: string; href: string }[] } => Boolean(section))
 
   return (
     <div className="min-h-screen">
@@ -82,7 +82,7 @@ export default async function ObjectPage({
         </div>
 
         <div className="hidden lg:block">
-          <ReadingSidebar sections={sidebar as any} />
+          <ReadingSidebar sections={sidebar} />
         </div>
       </div>
     </div>

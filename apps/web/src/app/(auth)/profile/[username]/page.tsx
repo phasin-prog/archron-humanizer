@@ -47,7 +47,14 @@ const PLACEHOLDER_PROFILE = {
   ],
 }
 
-export default function ProfilePage() {
+export default async function ProfilePage({
+  params,
+}: {
+  params: Promise<{ username: string }>
+}) {
+  const { username } = await params
+  // TODO: Load user profile from database using username
+  void username
   const p = PLACEHOLDER_PROFILE
 
   return (

@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, use } from "react"
 import type { Editor } from "@tiptap/react"
 import {
   EditorCore,
@@ -13,7 +13,14 @@ import {
 } from "@archron/editor"
 import { Input, Button } from "@archron/ui"
 
-export default function DraftEditorPage() {
+export default function DraftEditorPage({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = use(params)
+  // TODO: Load draft content from database using id
+  void id
   const { state, setContent, setTitle, setStatus, save, readingTime } =
     useEditorState()
   const editorRef = useRef<Editor | null>(null)
