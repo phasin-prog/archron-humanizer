@@ -1,6 +1,7 @@
 import type { NextConfig } from "next"
 
 const config: NextConfig = {
+  basePath: "/admin",
   transpilePackages: [
     "@archron/ui",
     "@archron/auth",
